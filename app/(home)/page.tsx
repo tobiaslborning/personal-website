@@ -36,7 +36,7 @@ export default async function Page() {
     </div>
     <div className="animate-fade-in-5s block">
       <BackgroundGradientHome 
-        containerClassName="w-full overflow-hidden bg-background"
+        containerClassName="w-full overflow-hidden"
         firstColor="primary"
         secondColor="primary"
         thirdColor="primary" //181, 240, 177 darkmode

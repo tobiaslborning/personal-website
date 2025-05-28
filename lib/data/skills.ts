@@ -26,6 +26,8 @@ import {
     SiAdobepremierepro,
     SiAdobephotoshop,
     SiAdobelightroom,
+    SiPostman,
+    SiShadcnui,
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import { BiSolidPiano } from "react-icons/bi";
@@ -93,6 +95,11 @@ export const web_dev = [
        name: "SQLite",
        description: "Self-contained, serverless SQL database engine perfect for embedded applications and development. Offers ACID transactions, zero-configuration setup, and cross-platform compatibility in a single file.",
        icon: SiSqlite
+   },
+   {
+       name: "shadcn/ui",
+       description: "This isnt really a skill, but i love using this library<3",
+       icon: SiShadcnui
    }
 ];
 
@@ -150,6 +157,11 @@ export const dev_tools = [
        description: "Build automation and dependency management tool for Java projects. Provides standardized project structure, lifecycle management, and plugin ecosystem for compiling, testing, and packaging applications.",
        icon: SiApachemaven
    },
+   {
+       name: "Postman",
+       description: "API development and testing platform that simplifies building, testing, and documenting REST APIs. Provides intuitive interface for sending HTTP requests, organizing collections, and collaborating on API development.",
+       icon: SiPostman
+   },
 ];
 
 export const creative_tools = [
@@ -197,6 +209,7 @@ export const skillsMap = {
   postgresql: web_dev[6],
   firebase: web_dev[7],
   sqlite: web_dev[8],
+  shadcn: web_dev[9],
   
   // AI/ML
   pytorch: ai_ml[0],
@@ -211,6 +224,7 @@ export const skillsMap = {
   github: dev_tools[3],
   gitlab: dev_tools[4],
   maven: dev_tools[5],
+  postman: dev_tools[6],
   
   // Creative Tools
   figma: creative_tools[0],

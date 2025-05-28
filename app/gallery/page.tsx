@@ -1,6 +1,7 @@
 "use server"
 import { ImageGallery } from "@/components/gallery/image-gallery";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getImagesFromFolder } from "@/lib/utils/getImages";
 
 

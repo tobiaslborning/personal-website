@@ -43,6 +43,41 @@ const projects = [
             skillsMap.azure,
             skillsMap.docker
         ]
+    },
+    {
+        name: "This portfolio",
+        description: "You're looking at it. This is actually my second attempt at a portfolio, went for a more minimalistic approach this time. Still built with modern web tech, but this time i included a healthy dose of \"maybe I don't need to stack 3 animations components on top of each other\". The most recursive project in my collection.",
+        link: "https://github.com/TobiasBorning/personal-website",
+        link_text: "Link to Github",
+        technologies: [
+            skillsMap.nextjs,
+            skillsMap.typescript,
+            skillsMap.tailwindcss,
+            skillsMap.firebase,
+            skillsMap.shadcn
+        ]
+    },
+    {
+        name: "Cookbook",
+        description: "My introduction to proper software development during 3rd semester. Built a simple cookbook app using Java and FXML with a Spring Boot REST API - my first time working with APIs and discovering Postman. While the app itself isn't winning any design awards, this project taught me the fundamentals that actually matter. Used Maven, JUnit for testing, and GitLab for collaboration. The real learning was developing good Git habits - meaningful commits, code reviews, merge requests, and working with others on the same codebase.",
+        link: "https://github.com/TobiasBorning/Cookbook",
+        link_text: "Link to Github",
+        technologies: [
+            skillsMap.java,
+            skillsMap.springboot,
+            skillsMap.gitlab,
+            skillsMap.postman
+        ]
+
+    },
+    {
+        name: "Sudoku",
+        description: "Built during 2nd semester, this Sudoku app was where I first tackled creating algorithms from scratch. The app has Standard mode (prevents invalid moves) and Advanced mode that automatically solves puzzles and highlights errors. The best part was figuring out how to solve Sudoku algorithmically without Googling existing solutions - had to think through the logic myself, which was a proper brain workout. Built with JavaFX and styled with CSS.",
+        link: "https://github.com/TobiasBorning/Sudoku",
+        link_text: "Link to Github",
+        technologies: [
+            skillsMap.java,
+        ]
     }
 ]
 

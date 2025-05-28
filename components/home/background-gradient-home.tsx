@@ -125,7 +125,7 @@ export const BackgroundGradientHome = ({
   return (
     <div
       className={cn(
-        "h-screen w-screen relative overflow-visible top-0 left-0",
+        "h-screen w-screen relative overflow-visible -z-10 top-0 left-0",
         containerClassName
       )}
     >
