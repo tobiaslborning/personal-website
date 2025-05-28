@@ -8,7 +8,7 @@ const projects = [
     {
         name: "MuZero-knockoff",
         description: "Made a Python implementation of Google DeepMind's MuZero algorithm using PyTorch, featuring model-based reinforcement learning for arcade-style games. The system combines Monte Carlo Tree Search (u-MCTS) with three interconnected neural networks (representation, dynamics, and prediction) to learn optimal game strategies without prior knowledge of game rules.",
-        link: "/",
+        link: "https://youtu.be/51_9J9dxlZM",
         link_text: "Link to video",
         technologies: [
             skillsMap.python,
@@ -17,7 +17,7 @@ const projects = [
     },
     {
         name: "SnackOverflow display",
-        description: "A real-time dashboard application for tracking and displaying student kiosk purchases with an interactive leaderboard system. Built to enhance the student experience by gamifying snack purchases and providing transparent spending insights for the campus community. Features live purchase feeds, top spender rankings, and seamless integration with the Zettle API for secure payment processing. The responsive web interface creates an engaging community experience that increased student interaction with the kiosk system while providing valuable insights into purchasing patterns and popular items.",
+        description: "A real-time dashboard application for tracking and displaying student kiosk purchases with an interactive leaderboard system. Built to enhance the student experience by gamifying snack purchases and providing transparent spending insights for the campus community. Features live purchase feeds, top spender rankings, and seamless integration with the Zettle API for secure payment processing. The responsive web interface creates an engaging community experience that increased student interaction with the kiosk system while providing valuable insights into purchasing patterns and popular items. Code available on my Github",
         link: "https://snack-overflow-display.web.app/info-view",
         link_text: "Link to site",
         technologies: [
@@ -47,7 +47,7 @@ const projects = [
     {
         name: "This portfolio",
         description: "You're looking at it. This is actually my second attempt at a portfolio, went for a more minimalistic approach this time. Still built with modern web tech, but this time i included a healthy dose of \"maybe I don't need to stack 3 animations components on top of each other\". The most recursive project in my collection.",
-        link: "https://github.com/TobiasBorning/personal-website",
+        link: "https://github.com/tobiaslborning/personal-website",
         link_text: "Link to Github",
         technologies: [
             skillsMap.nextjs,

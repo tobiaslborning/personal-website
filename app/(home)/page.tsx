@@ -25,7 +25,7 @@ export default async function Page() {
         <a className="hover:underline" href="skills">Skills</a>
         <a className="hover:underline" href="about-me">About me</a>
         <div className="flex">
-          <a className="hover:underline" href="https://www.github.com/TobiasBorning">{"Github "}</a>
+          <a className="hover:underline" href="https://www.github.com/tobiaslborning">{"Github "}</a>
           <span>{"/"}</span>
           <a className="hover:underline" href="https://www.linkedin.com/in/tobias-borning">LinkedIn</a>
         </div>
