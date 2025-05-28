@@ -1,16 +1,42 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local"
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const fontPair = localFont({
+  // USING : Sora for bold-medium, Switzer for regular-extralight
+  src: [
+    {
+      path: './../public/fonts/sora/Sora-Bold.otf',
+      weight: '700',
+      style: 'bold',
+    },
+    {
+      path: './../public/fonts/sora/Sora-SemiBold.otf',
+      weight: '600',
+      style: 'semibold',
+    },
+    {
+      path: './../public/fonts/sora/Sora-Medium.otf',
+      weight: '500',
+      style: 'medium',
+    },
+    {
+      path: './../public/fonts/switzer/Switzer-Regular.otf',
+      weight: '400',
+      style: 'regular',
+    },
+    {
+      path: './../public/fonts/switzer/Switzer-Light.otf',
+      weight: '300',
+      style: 'light',
+    },
+    {
+      path: './../public/fonts/switzer/Switzer-Extralight.otf',
+      weight: '200',
+      style: 'extralight',
+    },
+  ],
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${fontPair.className}`}
       >
         {children}
       </body>
