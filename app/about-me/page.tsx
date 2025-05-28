@@ -1,9 +1,8 @@
+"use server"
 import { BackgroundGradientHome } from "@/components/home/background-gradient-home";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 
 export default async function Page() {
-
   return (
     <main className="flex flex-col gap-8 mt-8 mx-4 lg:mx-8">
       <div>
@@ -20,8 +19,8 @@ export default async function Page() {
         <Separator className="bg-foreground"/>
       </div>
       {/* Content */}
-      <div className="flex justify-between">
-        <div className="flex flex-col gap-8 max-w-1/2 mb-16">
+      <div className="flex justify-between flex-col lg:flex-row">
+        <div className="flex flex-col gap-8 lg:max-w-1/2 mb-16">
           {/* WORK */}
           <div className="flex w-full flex-col pr-8">
             <h2 className="text-1xl md:text-3xl xl:text-4xl">Work & Education</h2>
@@ -61,16 +60,17 @@ export default async function Page() {
           <div className="flex w-full flex-col pr-8">
             <h2 className="text-1xl md:text-3xl xl:text-4xl">Resume</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
-              <p>If you want my resume, feel fre to send me a mail. tobias.borning@gmail.com</p>
+              <p>If you want my resume, feel fre to send me a mail. <span className="font-semibold italic">tobias.borning@gmail.com</span></p>
             </div>
           </div>
         </div>
         <BackgroundGradientHome 
-          containerClassName="overflow-hidden max-w-1/2 sticky -translate-y-8 bg-background animate-fade-in-5s"
+          containerClassName="hidden lg:block overflow-hidden max-w-1/2 sticky -translate-y-8 rounded-b-full bg-background animate-fade-in-5s"
           firstColor="primary"
           secondColor="primary"
           thirdColor="primary" //181, 240, 177 darkmode
-          interactive={true}
+          pointerColor="primary"
+          interactive={false}
           size="80%"
         />
       </div>

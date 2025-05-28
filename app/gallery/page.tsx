@@ -1,10 +1,10 @@
+"use server"
 import { ImageGallery } from "@/components/gallery/image-gallery";
 import { Separator } from "@/components/ui/separator";
 import { getImagesFromFolder } from "@/lib/utils/getImages";
 
 
 export default async function Page() {
-
   const images_ms = await getImagesFromFolder("images/molde-stryn")
   const images_fr = await getImagesFromFolder("images/freeride")
 

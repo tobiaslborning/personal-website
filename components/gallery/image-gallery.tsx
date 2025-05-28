@@ -19,7 +19,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   });
 
   return (
-    <div className="flex gap-2 mt-6">
+    <div className="flex gap-2 mt-6 mb-16">
       {columns.map((columnImages, columnIndex) => (
         <div key={columnIndex} className="flex flex-col gap-2 flex-1">
           {columnImages.map((img, imageIndex) => (

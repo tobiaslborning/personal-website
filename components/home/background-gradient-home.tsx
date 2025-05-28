@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import { oklch, rgb } from 'culori';
 
-function getCSSVariableAsRGB(varName : string) {
+function getCSSVariableAsRGB(varName: string) {
   // Ensure varName starts with --
   const cssVar = varName.startsWith('--') ? varName : `--${varName}`;
   
@@ -16,15 +16,42 @@ function getCSSVariableAsRGB(varName : string) {
     throw new Error(`CSS variable ${cssVar} not found`);
   }
   
-  // Extract RGB values from rgb() string
+  // Check if it's already in rgb() format
   const rgbMatch = colorValue.match(/rgb\(([^)]+)\)/);
-  
   if (rgbMatch) {
-    // Return just the numbers part: "22, 135, 16"
     return rgbMatch[1];
   }
   
-  throw new Error(`Color value ${colorValue} is not in rgb() format`);
+  // Handle hex format
+  const hexMatch = colorValue.match(/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/);
+  if (hexMatch) {
+    const hex = hexMatch[1];
+    let r, g, b;
+    
+    if (hex.length === 3) {
+      // 3-digit hex
+      r = parseInt(hex[0] + hex[0], 16);
+      g = parseInt(hex[1] + hex[1], 16);
+      b = parseInt(hex[2] + hex[2], 16);
+    } else {
+      // 6-digit hex
+      r = parseInt(hex.substring(0, 2), 16);
+      g = parseInt(hex.substring(2, 4), 16);
+      b = parseInt(hex.substring(4, 6), 16);
+    }
+    
+    return `${r}, ${g}, ${b}`;
+  }
+  
+  // Handle hsl format (optional)
+  const hslMatch = colorValue.match(/hsl\(([^)]+)\)/);
+  if (hslMatch) {
+    // For HSL, you'd need to convert to RGB
+    // This is more complex, so for now just throw an error
+    throw new Error(`HSL format not supported yet: ${colorValue}`);
+  }
+  
+  throw new Error(`Color value ${colorValue} is not in a supported format (hex, rgb, or hsl)`);
 }
 
 export const BackgroundGradientHome = ({
@@ -60,9 +87,9 @@ export const BackgroundGradientHome = ({
   const [tgY, setTgY] = useState(0);
   useEffect(() => {
     document.body.style.setProperty("--first-color", getCSSVariableAsRGB(firstColor));
-    document.body.style.setProperty("--second-color", getCSSVariableAsRGB(firstColor));
-    document.body.style.setProperty("--third-color", getCSSVariableAsRGB(firstColor));
-    document.body.style.setProperty("--pointer-color", getCSSVariableAsRGB(firstColor));
+    document.body.style.setProperty("--second-color", getCSSVariableAsRGB(secondColor));
+    document.body.style.setProperty("--third-color", getCSSVariableAsRGB(thirdColor));
+    document.body.style.setProperty("--pointer-color", getCSSVariableAsRGB(pointerColor));
     document.body.style.setProperty("--size", size);
     document.body.style.setProperty("--blending-value", blendingValue);
   }, []);
