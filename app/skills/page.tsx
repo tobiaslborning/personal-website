@@ -21,7 +21,7 @@ export default async function Page() {
             <Separator className="bg-foreground"/>
         </div>
         {/* PROGRAMMING LANGUAGES */}
-        <h2 className="text-xl md:text-2xl xl:text-4xl font-regular">Programming Languages</h2>
+        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Programming Languages</h2>
         <div className="flex flex-row gap-2 flex-wrap">
         {programming_languages.map((skill, index) => {
             return <SkillBadge
@@ -34,7 +34,7 @@ export default async function Page() {
         </div>
         <Separator className="bg-foreground"/>
         {/* Web dev */}
-        <h2 className="text-xl md:text-2xl xl:text-4xl font-regular">Web development</h2>
+        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Web development</h2>
         <div className="flex flex-row gap-2 flex-wrap">
         {web_dev.map((skill, index) => {
             return <SkillBadge
@@ -47,7 +47,7 @@ export default async function Page() {
         </div>
         <Separator className="bg-foreground"/>
         {/* AI & ML */}
-        <h2 className="text-xl md:text-2xl xl:text-4xl font-regular">AI & ML</h2>
+        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">AI & ML</h2>
         <div className="flex flex-row gap-2 flex-wrap">
         {ai_ml.map((skill, index) => {
             return <SkillBadge
@@ -60,7 +60,7 @@ export default async function Page() {
         </div>
         <Separator className="bg-foreground"/>
         {/* Dev tools */}
-        <h2 className="text-xl md:text-2xl xl:text-4xl font-regular">Dev tools</h2>
+        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Dev tools</h2>
         <div className="flex flex-row gap-2 flex-wrap">
         {dev_tools.map((skill, index) => {
             return <SkillBadge
@@ -73,7 +73,7 @@ export default async function Page() {
         </div>
         <Separator className="bg-foreground"/>
         {/* Creative Tools */}
-        <h2 className="text-xl md:text-2xl xl:text-4xl font-regular">Creative tools</h2>
+        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Creative tools</h2>
         <div className="flex flex-row gap-2 flex-wrap">
         {creative_tools.map((skill, index) => {
             return <SkillBadge

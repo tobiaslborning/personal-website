@@ -86,11 +86,7 @@ export default async function Page() {
     return (
         <main className="flex flex-col gap-8 mt-8 mx-4 lg:mx-8 mb-16">
         <div>
-            <div className="text-3xl md:text-5xl xl:text-7xl font-semibold">
-            <span>{"Projects"}</span>
-            </div>
-            <div className="text-xl md:text-2xl xl:text-4xl  font-regular">
-            </div>
+            <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{"Projects"}</h1>
         </div>
         <div className="flex flex-col gap-4">
             <Separator className="bg-foreground"/>
@@ -103,11 +99,11 @@ export default async function Page() {
             projects.map((project, index) => {
             return (
                 <div key={index} className="flex flex-col gap-4">
-                    <h2 className="text-xl md:text-3xl xl:text-5xl font-medium">{project.name}</h2>
+                    <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">{project.name}</h2>
                     <p className="text-sm md:text-lg xl:text-xl font-light">{project.description}</p>
-                    {project.link && <a className="w-fit flex hover:underline text-xl italic" href={project.link}>
+                    {project.link && <a className="w-fit flex hover:underline text-sm md:text-lg xl:text-xl font-regular italic" href={project.link}>
                             {project.link_text}
-                            <FaLink className="mt-1 ml-1"/>
+                            <FaLink className="md:mt-1 ml-1 size-4 md:size-6"/>
                         </a>}
                     <div className="flex flex-row gap-2 flex-wrap">
                         {project.technologies.map((skill, index) => {

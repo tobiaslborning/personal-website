@@ -1,6 +1,4 @@
-
 import Image from 'next/image';
-import { Separator } from '../ui/separator';
 
 interface ImageGalleryProps {
   images: ImageFetchData[];
@@ -29,6 +27,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
               alt={img.alt}
               width={1000}
               height={0}
+              unoptimized
               className='rounded-sm'
               />
           ))}

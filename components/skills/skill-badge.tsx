@@ -18,9 +18,9 @@ export const SkillBadge: React.FC<SkillBadgeProps> = ({
     return <>
       <Dialog>
         <DialogTrigger>
-          <div className="px-6 py-4 w-fit rounded-4xl text-lg font-regular flex border-foreground border-1 hover:bg-primary hover:text-background hover:cursor-pointer">
-              {Icon && <Icon className="size-8 mr-2"/>} {/* Render the icon */}
-              <h3 className="text-xl mt-[3px]">{name}</h3>
+          <div className="px-3 md:px-6 py-2 md:py-4 w-fit rounded-4xl font-regular flex border-foreground border-1 hover:bg-primary hover:text-background hover:cursor-pointer">
+              {Icon && <Icon className="size-4 md:size-8 mr-2"/>} {/* Render the icon */}
+              <h3 className="text-sm md:text-lg xl:text-xl -mt-[0.5px] md:mt-[3px]">{name}</h3>
           </div>
         </DialogTrigger>
         <DialogContent>
