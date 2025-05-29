@@ -1,15 +1,18 @@
 import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
+import { HighResImageDialogContent } from './highres-image-dialog-content';
 
 interface ImageGalleryProps {
   images: ImageFetchData[];
+  collection_name : string,
   className?: string;
   imageClassName?: string;
 }
 
 export const ImageGallery: React.FC<ImageGalleryProps> = ({ 
-  images, 
+  images,
+  collection_name 
 }) => {
   // Distribute images into 3 columns
   const columns = [[], [], []] as typeof images[];
@@ -37,14 +40,10 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                 <DialogTrigger className='hover:cursor-pointer'>
                   {image}
                 </DialogTrigger>
-                <DialogContent className='md:max-w-3xl xl:max-w-4xl max-h-screen mt-2 overflow-scroll'>
-                  <DialogTitle>
-                    {img.name}
-                  </DialogTitle>
-                  <div className='flex flex-col max-h-screen'>
-                    {image}
-                  </div>
-                </DialogContent>
+                <HighResImageDialogContent
+                  filename={img.name.replace(" Large.jpeg",".jpg")}
+                  collection_name={collection_name}
+                />
               </Dialog>
             )
           })}
