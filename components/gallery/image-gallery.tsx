@@ -27,8 +27,8 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
             const image = <Image
             src={img.src}
             alt={img.alt}
-            width={1000}
-            height={0}
+            width={img.width ?? 1000}
+            height={img.height ?? 0}
             unoptimized
             className='rounded-sm'
             />
