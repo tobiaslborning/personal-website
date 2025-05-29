@@ -125,10 +125,12 @@ export const BackgroundGradientHome = ({
   return (
     <div
       className={cn(
-        "h-screen w-screen relative overflow-visible -z-10 top-0 left-0",
+        "h-screen w-screen relative overflow-visible top-0 left-0",
         containerClassName
       )}
     >
+      <div className="sticky h-screen w-screen z-10 grain">
+      </div>
       <svg className="hidden">
         <defs>
           <filter id="blurMe">
