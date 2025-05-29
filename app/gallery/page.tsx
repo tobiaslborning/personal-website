@@ -4,15 +4,16 @@ import { Separator } from "@/components/ui/separator";
 import { getImagesFromFolder } from "@/lib/utils/getImages";
 
 export default async function Page() {
-  const [images_ms, images_fr] = await Promise.all([
-    getImagesFromFolder("images/molde-stryn"),
-    getImagesFromFolder("images/freeride")
+  const [images_fr, images_ms] = await Promise.all([
+    getImagesFromFolder("images/freeride"),
+    getImagesFromFolder("images/molde-stryn")
   ]);
   
   return (
     <main className="flex flex-col gap-8 mt-8 mx-4 lg:mx-8">
       <div>
         <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{"Image Gallery"}</h1>
+        <h2 className="text-2xl md:text-3xl xl:text-5xl">w/ some rough fetching logic, ill fix this later</h2>
       </div>
       <div className="flex flex-col gap-4">
         <Separator className="bg-foreground"/>
