@@ -19,7 +19,7 @@ export default async function Page() {
         <div className="flex flex-col gap-8 lg:max-w-1/2 mb-16">
           {/* WORK */}
           <div className="flex w-full flex-col pr-8">
-            <h2 className="text-2xl md:text-3xl xl:text-5xl font-regular">Work & Education</h2>
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Work & Education</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>{"2022 -> 2027 M.Sc Computer Science @ NTNU"}</p>
               <p>{"2024 : Summer intern @ Snapper NET Solutions"}</p>
@@ -30,7 +30,7 @@ export default async function Page() {
           <Separator className="bg-foreground"/>
           {/* Abakus */}
           <div className="flex w-full flex-col pr-8">
-            <h2 className="text-2xl md:text-3xl xl:text-5xl font-regular">Abakus</h2>
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Abakus</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
                 I've been involved with Abakus (the CS student association at NTNU) as both a member and leader of <span className="font-medium">Kontor- og Sosialkomiteen</span> where I led a team of about 18 people. 
@@ -42,7 +42,7 @@ export default async function Page() {
           <Separator className="bg-foreground"/>
           {/* Resume */}
           <div className="flex w-full flex-col pr-8">
-            <h2 className="text-2xl md:text-3xl xl:text-5xl font-regular">Non-coding skills</h2>
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Non-coding skills</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
                 I try to pick up new skills here and there, because I enjoy learning them. 
@@ -54,9 +54,12 @@ export default async function Page() {
           <Separator className="bg-foreground"/>
           {/* Resume */}
           <div className="flex w-full flex-col pr-8">
-            <h2 className="text-2xl md:text-3xl xl:text-5xl font-regular">Resume</h2>
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Contact</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
-              <p>If you want my resume, feel fre to send me a mail. <span className="font-semibold italic">tobias.borning@gmail.com</span></p>
+              <p>
+              Feel free to send me a mail at <a href="mailto:tobias.borning@gmail.com" className="font-semibold italic">tobias.borning@gmail.com</a>, 
+              or a message on <a className="font-semibold italic" href="https://www.linkedin.com/in/tobias-borning">LinkedIn.</a>
+              </p>
             </div>
           </div>
         </div>

@@ -28,26 +28,32 @@ import {
     SiAdobelightroom,
     SiPostman,
     SiShadcnui,
+    SiJavascript,
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import { BiSolidPiano } from "react-icons/bi";
 
 export const programming_languages = [
    {
-       name: "TypeScript",
-       description: "Statically typed superset of JavaScript that enhances code reliability and developer productivity. Provides excellent IntelliSense, compile-time error checking, and improved refactoring capabilities for large-scale applications.",
-       icon: SiTypescript
+        name: "TypeScript",
+        description: "Statically typed superset of JavaScript that enhances code reliability and developer productivity. Provides excellent IntelliSense, compile-time error checking, and improved refactoring capabilities for large-scale applications.",
+        icon: SiTypescript
    },
    {
-       name: "Python",
-       description: "Versatile, high-level programming language ideal for backend development, automation, data analysis, and AI/ML projects. Known for its clean syntax, extensive library ecosystem, and rapid development capabilities.",
-       icon: SiPython
+        name: "Python",
+        description: "Versatile, high-level programming language ideal for backend development, automation, data analysis, and AI/ML projects. Known for its clean syntax, extensive library ecosystem, and rapid development capabilities.",
+        icon: SiPython
    },
    {
-       name: "Java",
-       description: "Robust, object-oriented programming language widely used for enterprise applications, Android development, and large-scale systems. Offers platform independence, strong memory management, and excellent performance.",
-       icon: FaJava
-   }
+        name: "Java",
+        description: "Robust, object-oriented programming language widely used for enterprise applications, Android development, and large-scale systems. Offers platform independence, strong memory management, and excellent performance.",
+        icon: FaJava
+   },
+   {
+        name: "JavaScript",
+        description: "Dynamic programming language that powers modern web development. Versatile and widely-used for both frontend interfaces and backend services, with a rich ecosystem of libraries and frameworks.",
+        icon: SiJavascript
+    }
 ];
 
 export const web_dev = [

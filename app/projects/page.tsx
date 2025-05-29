@@ -24,7 +24,8 @@ const projects = [
             skillsMap.nextjs,
             skillsMap.typescript,
             skillsMap.tailwindcss,
-            skillsMap.firebase
+            skillsMap.firebase,
+            skillsMap.shadcn
         ]
     },
     {
@@ -41,7 +42,8 @@ const projects = [
             skillsMap.postgresql,
             skillsMap.langchain,
             skillsMap.azure,
-            skillsMap.docker
+            skillsMap.docker,
+            skillsMap.shadcn
         ]
     },
     {
@@ -94,7 +96,7 @@ export default async function Page() {
             <Separator className="bg-foreground"/>
         </div>
         <div className="flex justify-between flex-col lg:flex-row">
-            <div className="flex flex-col gap-8 w-full lg:w-2/3">
+            <div className="flex flex-col gap-8 w-full lg:w-2/3 2xl:w-1/2">
             {
             projects.map((project, index) => {
             return (
@@ -122,7 +124,7 @@ export default async function Page() {
             }
             </div>
             <BackgroundGradientHome 
-                containerClassName="hidden lg:block overflow-hidden max-w-1/3 sticky rounded-b-full -translate-y-8 animate-fade-in-5s"
+                containerClassName="hidden lg:block overflow-hidden max-w-1/3 2xl:max-w-1/2 sticky rounded-b-full -translate-y-8 animate-fade-in-5s"
                 firstColor="primary"
                 secondColor="primary"
                 thirdColor="primary" //181, 240, 177 darkmode
