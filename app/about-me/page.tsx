@@ -24,7 +24,7 @@ export default async function Page() {
               <p><span className="font-normal">{"2022 -> 2027 : "}</span> {"M.Sc Computer Science @ NTNU"}</p>
               <p><span className="font-normal">{"2024 : "}</span> {" Summer intern @ Snapper NET Solutions"}</p>
               <p><span className="font-normal">{"2024 -> now : "}</span> {" Part time software developer @ Snapper NET Solutions"}</p>
-              <p><span className="font-normal">{"2024 : "}</span> {" Summer intern @ Bekk - Data & Analytics"}</p>
+              <p><span className="font-normal">{"2025 : "}</span> {" Summer intern @ Bekk - Data & Analytics"}</p>
             </div>
           </div>
           <Separator className="bg-foreground"/>
@@ -58,7 +58,7 @@ export default async function Page() {
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
               When I'm not working or studying, you'll hopefully find me in the mountains - whether that's ski touring, freeriding, hiking, or running. 
-              I actually spent two years skiing before starting university, so the mountains are still my favorite place to spend free time.
+              I actually spent two years skiing before starting university, and the mountains are still my favorite place to spend free time.
               </p>
             </div>
           </div>
