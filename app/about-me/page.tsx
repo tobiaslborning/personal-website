@@ -21,10 +21,10 @@ export default async function Page() {
           <div className="flex w-full flex-col pr-8">
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Work & Education</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
-              <p>{"2022 -> 2027 M.Sc Computer Science @ NTNU"}</p>
-              <p>{"2024 : Summer intern @ Snapper NET Solutions"}</p>
-              <p>{"2024 -> now : Part time software developer @ Snapper NET Solutions"}</p>
-              <p>{"2025 : Summer intern @ Bekk - Data & Analytics"}</p>
+              <p><span className="font-normal">{"2022 -> 2027 : "}</span> {"M.Sc Computer Science @ NTNU"}</p>
+              <p><span className="font-normal">{"2024 : "}</span> {" Summer intern @ Snapper NET Solutions"}</p>
+              <p><span className="font-normal">{"2024 -> now : "}</span> {" Part time software developer @ Snapper NET Solutions"}</p>
+              <p><span className="font-normal">{"2024 : "}</span> {" Summer intern @ Bekk - Data & Analytics"}</p>
             </div>
           </div>
           <Separator className="bg-foreground"/>
@@ -33,16 +33,16 @@ export default async function Page() {
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Abakus</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
-                I've been involved with Abakus (the CS student association at NTNU) as both a member and leader of <span className="font-medium">Kontor- og Sosialkomiteen</span> where I led a team of about 18 people. 
+                I've been involved with <a href="https://abakus.no" className="font-medium italic hover:underline">Abakus</a> (the CS student association at NTNU) as both a member and leader of <span className="font-medium">Kontor- og Sosialkomiteen</span> where I led a team of about 18 people. 
                 It's been a rewarding experience organizing social events and managing office activities for the student community. 
                 Leading the committee taught me a lot about coordinating teams and creating engaging experiences for fellow students, while also being part of a larger organization that connects students with industry and each other.
               </p>
             </div>
           </div>
           <Separator className="bg-foreground"/>
-          {/* Resume */}
+          {/* Creative stuff */}
           <div className="flex w-full flex-col pr-8">
-            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Non-coding skills</h2>
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Creative stuff</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
                 I try to pick up new skills here and there, because I enjoy learning them. 
@@ -52,7 +52,18 @@ export default async function Page() {
             </div>
           </div>
           <Separator className="bg-foreground"/>
-          {/* Resume */}
+          {/* Away from work */}
+          <div className="flex w-full flex-col pr-8">
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Away from work</h2>
+            <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
+              <p>
+              When I'm not working or studying, you'll hopefully find me in the mountains - whether that's ski touring, freeriding, hiking, or running. 
+              I actually spent two years skiing before starting university, so the mountains are still my favorite place to spend free time.
+              </p>
+            </div>
+          </div>
+          <Separator className="bg-foreground"/>
+          {/* Contact */}
           <div className="flex w-full flex-col pr-8">
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Contact</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">

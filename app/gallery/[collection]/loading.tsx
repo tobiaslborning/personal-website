@@ -14,7 +14,6 @@ export default function Loading() {
         <a className="hover:italic text-md md:text-xl xl:text-2xl w-fit pr-2" href="/">{"< Back"}</a>
         <Separator className="bg-foreground"/>
       </div>
-      
     </main>
   )
 }

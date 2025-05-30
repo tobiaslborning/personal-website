@@ -14,6 +14,9 @@ export async function HighResImageDialogContent({filename, collection_name } : H
     const aspectRatio = image.width && image.height ? image.width / image.height : 1;
     const isLandscape = aspectRatio > 1;
 
+    // Generate a simple blur placeholder
+    const blurDataURL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Rev//2Q==";
+
     return (
         <DialogContent className={`
             ${isLandscape 
@@ -46,6 +49,9 @@ export async function HighResImageDialogContent({filename, collection_name } : H
                             }
                         `}
                         priority
+                        placeholder="blur"
+                        blurDataURL={blurDataURL}
+                        sizes="(max-width: 640px) 95vw, (max-width: 768px) 90vw, 1200px"
                     />
                 </div>
             </div>
