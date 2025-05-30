@@ -34,7 +34,6 @@ export async function getCollectionsInfo(folderPath: string = 'collections'): Pr
       })
     }
     collections.sort((a, b) => b.priority - a.priority)
-    console.log(collections)
     return collections
 
   } catch (error) {
