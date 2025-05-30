@@ -25,7 +25,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   return (
     <div className="flex gap-2 mt-6 mb-16">
       {columns.map((columnImages, columnIndex) => (
-        <div key={columnIndex} className="flex flex-col gap-2 flex-1">
+        <div key={columnIndex} className="flex flex-col gap-1 flex-1">
           {columnImages.map((img, imageIndex) => {
             const image = <Image
             src={img.src}
@@ -33,7 +33,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
             width={img.width ?? 1000}
             height={img.height ?? 0}
             unoptimized
-            className='rounded-sm'
+            className='rounded-sm hover:border-primary border-background border-2'
             />
             return (
               <Dialog key={imageIndex}>

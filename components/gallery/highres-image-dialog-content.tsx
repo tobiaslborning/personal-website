@@ -8,7 +8,7 @@ interface HighResImageDialogProps {
 }
 
 export async function HighResImageDialogContent({filename, collection_name } : HighResImageDialogProps) { 
-    const image = await getHighResImage(`collections/${collection_name}/high-res`, filename)
+    const image : ImageFetchData = await getHighResImage(`collections/${collection_name}/high-res`, filename)
 
     // Calculate aspect ratio to determine layout
     const aspectRatio = image.width && image.height ? image.width / image.height : 1;
@@ -20,12 +20,18 @@ export async function HighResImageDialogContent({filename, collection_name } : H
                 ? 'md:max-w-5xl xl:max-w-6xl' 
                 : 'md:max-w-2xl xl:max-w-3xl'
             } 
-            max-h-[90vh] flex flex-col mt-2 overflow-hidden
+            max-h-[95vh] flex flex-col overflow-hidden p-2
         `}>
-            <DialogTitle className="text-lg font-medium mb-2">
-                {image.alt}
+            <DialogTitle className="text-lg font-medium mx-auto mt-2" asChild>
+                <div className="flex flex-wrap gap-2 text-xs md:text-lg xl:text-xl">
+                    <p>{image.make  ?? ""} {(image.model ?? "").replace(image.make ?? "", "")}</p>
+                    <p>{">"}</p>
+                    <p>{image.lensMake ?? ""} {(image.lensModel ?? "").replace(image.lensMake ?? "", "")}</p>
+                    <p>{">"}</p>
+                    <p>F{image.fstop} : {image.exposureTime}</p>
+                </div>
             </DialogTitle>
-            <div className='flex-1 flex items-center justify-center overflow-hidden'>
+            <div className='flex-1 flex items-center justify-center overflow-hidden rounded-sm'>
                 <div className='relative w-full h-full flex items-center justify-center'>
                     <Image
                         src={image.src}

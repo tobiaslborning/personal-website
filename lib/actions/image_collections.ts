@@ -2,10 +2,12 @@
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp'
+import exifReader from 'exif-reader';
 
 export interface CollectionInfo {
   title : string
   description : string
+  priority : number
   path? : string
 }
 
@@ -27,13 +29,14 @@ export async function getCollectionsInfo(folderPath: string = 'collections'): Pr
       collections.push({
         title: info.title,
         description: info.description,
+        priority: info.priority,
         path: folderName
       })
     }
-
+    collections.sort((a, b) => b.priority - a.priority)
+    console.log(collections)
     return collections
 
-    return collections
   } catch (error) {
     console.error('Error reading images directory:', error);
     return [];
@@ -103,16 +106,50 @@ export async function getCollectionInfo(folderPath: string = 'collections'): Pro
   }
 }
 
+// Helper function for exposure time formating
+function formatExposureTime(exposureTime: number | undefined): string | undefined {
+  if (!exposureTime) {
+    return undefined
+  }
+  // Handle edge cases
+  if (exposureTime <= 0) {
+    return undefined;
+  }
+  
+  // For exposures 1 second or longer, show as decimal with 's'
+  if (exposureTime >= 1) {
+    if (exposureTime % 1 === 0) {
+      return `${exposureTime}s`;
+    }
+    return `${exposureTime.toFixed(1)}s`;
+  }
+  
+  // For fractional seconds, convert to 1/x format
+  const denominator = Math.round(1 / exposureTime);
+  return `1/${denominator}`;
+}
 
 export async function getHighResImage(highResPath : string, filename : string) : Promise<ImageFetchData> {
   const imagePath = path.join(process.cwd(), 'public', highResPath, filename);
-  let width, height
+  let width, height, make, model, lensMake, lensModel, fstop, exposureTime
 
   try {
     // Get image dimensions server-side
     const metadata = await sharp(imagePath).metadata();
     width = metadata.width;
     height = metadata.height;
+
+    // Add camera information
+    if (metadata.exif){
+      const exifData = exifReader(metadata.exif);
+      make = exifData.Image?.Make,
+      model = exifData.Image?.Model,
+      lensMake = exifData.Photo?.LensMake,
+      lensModel = exifData.Photo?.LensModel,
+      fstop = exifData.Photo?.FNumber,
+      exposureTime = formatExposureTime(exifData.Photo?.ExposureTime)
+    }
+
 
   } catch (error) {
     console.warn(`Could not get dimensions for ${filename}:`, error);
@@ -124,5 +161,12 @@ export async function getHighResImage(highResPath : string, filename : string) :
     name: filename,
     width: width,
     height: height,
+    make: make,
+    model: model,
+    lensMake: lensMake,
+    lensModel: lensModel,
+    fstop: fstop,
+    exposureTime: exposureTime
+
   }
 }
