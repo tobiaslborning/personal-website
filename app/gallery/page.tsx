@@ -17,8 +17,7 @@ export default async function Page() {
       {collections.map((collection, index) => {
         return <div className="flex flex-col gap-4 lg:gap-8" key={index}>
           <div className="flex gap-3">
-            <span className="text-2xl md:text-3xl xl:text-5xl">{">"}</span>
-            <span><a href={`/gallery/${collection.path ?? ""}`} className="text-2xl md:text-3xl xl:text-5xl font-medium hover:italic hover:cursor-pointer pr-2">{collection.title}</a></span>
+            <span><a href={`/gallery/${collection.path ?? ""}`} className="text-2xl md:text-3xl xl:text-5xl font-medium hover:italic hover:cursor-pointer pr-2">{collection.title + " >"}</a></span>
           </div>
           <Separator className="bg-foreground"/>
         </div>
