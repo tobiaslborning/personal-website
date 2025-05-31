@@ -1,22 +1,19 @@
 "use server"
+import { BackBar } from "@/components/common/back-bar";
 import { BackgroundGradientHome } from "@/components/home/background-gradient-home";
 import { Separator } from "@/components/ui/separator";
 
 export default async function Page() {
   return (
-    <main className="flex flex-col gap-8 mt-8 mx-4 lg:mx-8">
+    <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8">
       <div>
           <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{"Hi, I'm still Tobias"}</h1>
           <h2 className="text-2xl md:text-3xl xl:text-5xl font-regular">{"Here is a litte bit about me"}</h2> 
       </div>
-      <div className="flex flex-col gap-4">
-        <Separator className="bg-foreground"/>
-        <a className="hover:italic text-md md:text-xl xl:text-2xl w-fit pr-2" href="/">{"< Back"}</a>
-        <Separator className="bg-foreground"/>
-      </div>
+      <BackBar />
       {/* Content */}
       <div className="flex justify-between flex-col lg:flex-row">
-        <div className="flex flex-col gap-8 lg:max-w-1/2 mb-16">
+        <div className="flex flex-col gap-4 lg:gap-8 lg:max-w-1/2 mb-16">
           {/* WORK */}
           <div className="flex w-full flex-col pr-8">
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Work & Education</h2>
@@ -84,24 +81,6 @@ export default async function Page() {
           size="80%"
         />
       </div>
-      {/* WORK */}
-      {/* <div className="flex justify-between gap-8 flex-col lg:flex-row">
-        <div className="flex flex-col w-1/2">
-          <h2 className="text-1xl md:text-3xl xl:text-4xl">Abakus</h2>
-          <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
-            <text>{"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary"}</text>
-          </div>
-        </div>
-        <div className="max-w-1/2 2xl:max-w-1/3 max-h-96 overflow-hidden rounded-sm">
-          <Image 
-            src={"/images/site/abakus_ledelsen.jpeg"}
-            width={1200}
-            height={0}
-            className="object-contain"
-            alt=""
-          />
-        </div>
-      </div> */}
     </main>
   )
 }

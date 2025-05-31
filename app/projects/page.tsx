@@ -1,3 +1,4 @@
+import { BackBar } from "@/components/common/back-bar";
 import { BackgroundGradientHome } from "@/components/home/background-gradient-home";
 import { SkillBadge } from "@/components/skills/skill-badge";
 import { Separator } from "@/components/ui/separator";
@@ -86,17 +87,13 @@ const projects = [
 export default async function Page() {
 
     return (
-        <main className="flex flex-col gap-8 mt-8 mx-4 lg:mx-8 mb-16">
+        <main className="flex flex-col gap-4 lg:gap-8  mt-8 mx-4 lg:mx-8 mb-16">
         <div>
             <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{"Projects"}</h1>
         </div>
-        <div className="flex flex-col gap-4">
-            <Separator className="bg-foreground"/>
-            <a className="hover:italic text-md md:text-xl xl:text-2xl w-fit pr-2" href="/">{"< Back"}</a>
-            <Separator className="bg-foreground"/>
-        </div>
+        <BackBar />
         <div className="flex justify-between flex-col lg:flex-row">
-            <div className="flex flex-col gap-8 w-full lg:w-2/3 2xl:w-1/2">
+            <div className="flex flex-col gap-4 lg:gap-8 w-full lg:w-2/3 2xl:w-1/2">
             {
             projects.map((project, index) => {
             return (
