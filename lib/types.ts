@@ -13,6 +13,7 @@ type ImageFetchData = {
 }
 
 type FlashCard = {
+  title: string;
   question: string;
   answer: string;
 };

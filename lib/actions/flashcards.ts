@@ -88,7 +88,7 @@ function extractTopicFromSource(source: string): string {
 function parseFlashcardsFromContent(content: string): FlashCard[] {
   const flashcards: FlashCard[] = [];
   
-  // Try multiple card patterns since the format might vary
+  // Split by card headers (## Card X: Title)
   let cardSections = content.split(/## Card \d+:/);
   
   // If no cards found with that pattern, try alternative patterns
@@ -96,47 +96,30 @@ function parseFlashcardsFromContent(content: string): FlashCard[] {
     cardSections = content.split(/##\s*Card\s*\d+\s*:/);
   }
   
-  // If still no cards, try numbered sections
-  if (cardSections.length === 1) {
-    cardSections = content.split(/##\s*\d+\./);
-  }
-  
+  console.log(`Found ${cardSections.length - 1} card sections`);
   
   // Skip the first element (header before first card)
   for (let i = 1; i < cardSections.length; i++) {
     const section = cardSections[i];
     
-    // Try multiple question patterns
-    let questionMatch = section.match(/^\s*(.+?)\*\*/);
-    
-    // If no match, try alternative patterns
-    if (!questionMatch) {
-      questionMatch = section.match(/^\s*\*\*(.+?)\*\*/);
+    // Extract title (first line after the card number)
+    const titleMatch = section.match(/^\s*(.+?)$/m);
+    if (!titleMatch) {
+      console.log(`No title found in section ${i}`);
+      continue;
     }
+    const title = titleMatch[1].trim();
     
-    if (!questionMatch) {
-      questionMatch = section.match(/^\s*(.+?)\n/);
-    }
-    
+    // Extract question (text between ** markers)
+    const questionMatch = section.match(/\*\*(.*?)\*\*/);
     if (!questionMatch) {
       console.log(`No question found in section ${i}`);
       continue;
     }
+    const question = questionMatch[1].trim();
     
-    const question = questionMatch[1].trim().replace(/^\*\*|\*\*$/g, '');
-    
-    // Try multiple answer patterns
-    let answerMatch = section.match(/<summary>.*?<\/summary>\s*([\s\S]*?)\s*<\/details>/i);
-    
-    // If no details/summary tags, try to find answer after question
-    if (!answerMatch) {
-      const lines = section.split('\n');
-      const answerLines = lines.slice(1).filter(line => line.trim());
-      if (answerLines.length > 0) {
-        answerMatch = ["", answerLines.join('\n')];
-      }
-    }
-    
+    // Extract answer (content between <summary> and </details>)
+    const answerMatch = section.match(/<summary>.*?<\/summary>\s*([\s\S]*?)\s*<\/details>/i);
     if (!answerMatch) {
       console.log(`No answer found in section ${i}`);
       continue;
@@ -147,8 +130,9 @@ function parseFlashcardsFromContent(content: string): FlashCard[] {
     // Clean up the answer
     answer = cleanAnswerText(answer);
     
-    if (question && answer) {
+    if (title && question && answer) {
       flashcards.push({
+        title,
         question,
         answer
       });

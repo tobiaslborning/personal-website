@@ -11,6 +11,7 @@ interface CardWithCollection {
   collectionIndex: number;
   cardIndex: number;
   topic: string;
+  title: string;
   question: string;
   answer: string;
 }
@@ -30,6 +31,7 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
           collectionIndex,
           cardIndex,
           topic: collection.topic,
+          title: card.title,
           question: card.question,
           answer: card.answer
         });
@@ -88,7 +90,7 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
   const total = allCards.length;
 
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full max-w-2xl mx-auto">
       {/* Progress indicator */}
       <div className="flex justify-between items-center mb-4">
         <div className="text-sm md:text-base text-muted-foreground">
@@ -109,14 +111,13 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
       {/* Current flashcard */}
       <Flashcard
         topic={currentCard.topic}
+        title={currentCard.title}
         question={currentCard.question}
         answer={currentCard.answer}
       />
       
-      <Separator className="bg-foreground mt-6 mb-4" />
-      
       {/* Navigation */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-4">
         <button 
           onClick={handleNext}
           className="

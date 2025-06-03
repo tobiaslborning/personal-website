@@ -4,39 +4,33 @@ import { Separator } from '../ui/separator';
 
 interface FlashcardProps {
   topic: string;
+  title: string;
   question: string;
   answer: string;
 }
 
-export const Flashcard: React.FC<FlashcardProps> = ({ topic, question, answer }) => {
+export const Flashcard: React.FC<FlashcardProps> = ({ topic, title, question, answer }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
-  // Function to render text with line breaks
-  const renderTextWithBreaks = (text: string) => {
-    return text.split('\n').map((line, index) => (
-      <span key={index}>
-        {line}
-        {index < text.split('\n').length - 1 && <br />}
-      </span>
-    ));
-  };
-
   return (
     <div className="w-full max-w-2xl mx-auto">
-      {/* Topic - always visible */}
-      <div className="text-lg md:text-xl xl:text-2xl font-medium mb-4">
+      {/* Topic and Title - always visible */}
+      <div className="text-lg md:text-xl xl:text-2xl font-medium mb-2">
         {topic}
+      </div>
+      <div className="text-base md:text-lg xl:text-xl text-muted-foreground mb-4">
+        {title}
       </div>
       <Separator className="bg-foreground mb-4" />
       
       {/* Card */}
       <div 
         onClick={handleFlip}
-        className="relative w-full min-h-[70vh] cursor-pointer group"
+        className="relative w-full min-h-[75vh] cursor-pointer group"
       >
         <div className={`
           absolute inset-0 w-full h-full transition-transform duration-500 transform-style-preserve-3d
