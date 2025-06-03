@@ -89,6 +89,7 @@ function parseFlashcardsFromContent(content: string): FlashCard[] {
   const flashcards: FlashCard[] = [];
   
   // Split by card headers (## Card X: Title)
+  // Split by card headers (## Card X: Title)
   let cardSections = content.split(/## Card \d+:/);
   
   // If no cards found with that pattern, try alternative patterns
@@ -96,7 +97,11 @@ function parseFlashcardsFromContent(content: string): FlashCard[] {
     cardSections = content.split(/##\s*Card\s*\d+\s*:/);
   }
   
-  console.log(`Found ${cardSections.length - 1} card sections`);
+  // If still no cards, try numbered sections
+  if (cardSections.length === 1) {
+    cardSections = content.split(/##\s*\d+\./);
+  }
+  
   
   // Skip the first element (header before first card)
   for (let i = 1; i < cardSections.length; i++) {
