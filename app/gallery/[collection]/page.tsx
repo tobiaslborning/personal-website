@@ -2,6 +2,7 @@ import { BackBar } from "@/components/common/back-bar"
 import { ImageGallery } from "@/components/gallery/image-gallery"
 import { Separator } from "@/components/ui/separator"
 import { CollectionInfo, getImagesFromFolder, getCollectionInfo } from "@/lib/actions/image_collections"
+import { shuffleInPlace } from "@/lib/utils"
 
 
 interface PageProps {
@@ -15,7 +16,8 @@ export default async function Post({ params } : PageProps ) {
 
     const fetched_collection : CollectionInfo | undefined = await getCollectionInfo(`collections/${collection}`) 
     const images : ImageFetchData[] = await getImagesFromFolder(`collections/${collection}/preview`) 
-
+    shuffleInPlace(images)
+    
     if (!fetched_collection) {
         return <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8">
             <div>

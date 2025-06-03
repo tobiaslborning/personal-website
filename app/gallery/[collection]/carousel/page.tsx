@@ -1,6 +1,7 @@
 import { BackBar } from "@/components/common/back-bar"
 import { ImageCarousel } from "@/components/gallery/image-carousel"
 import { CollectionInfo, getCollectionInfo, getImagesFromFolder } from "@/lib/actions/image_collections"
+import { shuffleInPlace } from "@/lib/utils"
 import { Separator } from "@radix-ui/react-separator"
 
 interface PageProps {
@@ -13,6 +14,7 @@ export default async function Post({ params } : PageProps ) {
     const { collection } = await params
     const fetched_collection : CollectionInfo | undefined = await getCollectionInfo(`collections/${collection}`) 
     const images : ImageFetchData[] = await getImagesFromFolder(`collections/${collection}/preview`) 
+    shuffleInPlace(images)
 
     if (!fetched_collection) {
         return <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8">

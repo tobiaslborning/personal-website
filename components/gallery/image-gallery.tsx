@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import { HighResImageDialogContent } from './highres-image-dialog-content';
+import { getIndexOfLowest } from '@/lib/utils';
 
 interface ImageGalleryProps {
   images: ImageFetchData[];
@@ -16,9 +17,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
 }) => {
   // Distribute images into 3 columns
   const columns = [[], [], []] as typeof images[];
-  
-  images.forEach((img, index) => {
-    columns[index % 3].push(img);
+  const columnHeights = [0,0,0]
+
+  images.forEach((img) => {
+    const index = getIndexOfLowest(columnHeights)
+    columns[index].push(img);
+    columnHeights[index] += img.height ?? 1500 // 1500 is an estimated average 
   });
 
 
