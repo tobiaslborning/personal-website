@@ -11,3 +11,13 @@ type ImageFetchData = {
   fstop?: number
   exposureTime?: string
 }
+
+type FlashCard = {
+  question: string;
+  answer: string;
+};
+
+type FlashCardCollections = {
+  topic: string;
+  flashcards: FlashCard[];
+}[];
