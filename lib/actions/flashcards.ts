@@ -101,7 +101,6 @@ function parseFlashcardsFromContent(content: string): FlashCard[] {
     cardSections = content.split(/##\s*\d+\./);
   }
   
-  console.log(`Found ${cardSections.length - 1} card sections`);
   
   // Skip the first element (header before first card)
   for (let i = 1; i < cardSections.length; i++) {

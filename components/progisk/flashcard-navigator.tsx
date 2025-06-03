@@ -88,7 +88,7 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
   const total = allCards.length;
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl">
       {/* Progress indicator */}
       <div className="flex justify-between items-center mb-4">
         <div className="text-sm md:text-base text-muted-foreground">
