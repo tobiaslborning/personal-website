@@ -20,12 +20,17 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [viewedIndices, setViewedIndices] = useState<Set<number>>(new Set());
   const [allCards, setAllCards] = useState<CardWithCollection[]>([]);
+  const [filteredCards, setFilteredCards] = useState<CardWithCollection[]>([]);
+  const [selectedTopic, setSelectedTopic] = useState<string>('all');
+  const [availableTopics, setAvailableTopics] = useState<string[]>([]);
 
   // Flatten all cards from all collections into a single array
   useEffect(() => {
     const flattenedCards: CardWithCollection[] = [];
+    const topics = new Set<string>();
     
     flashcard_collections.forEach((collection, collectionIndex) => {
+      topics.add(collection.topic);
       collection.flashcards.forEach((card, cardIndex) => {
         flattenedCards.push({
           collectionIndex,
@@ -39,6 +44,8 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
     });
     
     setAllCards(flattenedCards);
+    setAvailableTopics(Array.from(topics));
+    setFilteredCards(flattenedCards); // Initially show all cards
     
     // Set initial random index
     if (flattenedCards.length > 0) {
@@ -47,12 +54,34 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
     }
   }, [flashcard_collections]);
 
+  // Filter cards based on selected topic
+  useEffect(() => {
+    let filtered = allCards;
+    
+    if (selectedTopic !== 'all') {
+      filtered = allCards.filter(card => card.topic === selectedTopic);
+    }
+    
+    setFilteredCards(filtered);
+    setViewedIndices(new Set()); // Reset viewed cards when filter changes
+    
+    // Set new random index for filtered cards
+    if (filtered.length > 0) {
+      const randomIndex = Math.floor(Math.random() * filtered.length);
+      setCurrentIndex(randomIndex);
+    }
+  }, [selectedTopic, allCards]);
+
+  const handleTopicChange = (topic: string) => {
+    setSelectedTopic(topic);
+  };
+
   const handleNext = () => {
     // Add current index to viewed list
     setViewedIndices(prev => new Set([...prev, currentIndex]));
     
-    // Get unviewed indices
-    const unviewedIndices = Array.from({ length: allCards.length }, (_, i) => i)
+    // Get unviewed indices from filtered cards
+    const unviewedIndices = Array.from({ length: filteredCards.length }, (_, i) => i)
       .filter(index => !viewedIndices.has(index) && index !== currentIndex);
     
     if (unviewedIndices.length > 0) {
@@ -62,7 +91,7 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
     } else {
       // All cards viewed, reset and start over
       setViewedIndices(new Set([currentIndex]));
-      const allIndices = Array.from({ length: allCards.length }, (_, i) => i)
+      const allIndices = Array.from({ length: filteredCards.length }, (_, i) => i)
         .filter(index => index !== currentIndex);
       if (allIndices.length > 0) {
         const randomIndex = allIndices[Math.floor(Math.random() * allIndices.length)];
@@ -73,28 +102,72 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
 
   const handleReset = () => {
     setViewedIndices(new Set());
-    const randomIndex = Math.floor(Math.random() * allCards.length);
+    const randomIndex = Math.floor(Math.random() * filteredCards.length);
     setCurrentIndex(randomIndex);
   };
 
-  if (allCards.length === 0) {
+  if (filteredCards.length === 0) {
     return (
       <div className="w-full max-w-2xl mx-auto text-center">
-        <p className="text-lg text-muted-foreground">No flashcards available</p>
+        <p className="text-lg text-muted-foreground">No flashcards available for the selected topic</p>
       </div>
     );
   }
 
-  const currentCard = allCards[currentIndex];
+  const currentCard = filteredCards[currentIndex];
   const progress = viewedIndices.size;
-  const total = allCards.length;
+  const total = filteredCards.length;
 
   return (
     <div className="w-full max-w-2xl mx-auto">
+      {/* Topic Filter */}
+      <div className="mb-6">
+        <div className="text-lg md:text-xl xl:text-2xl font-medium mb-4">
+          Select Topic
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => handleTopicChange('all')}
+            className={`
+              px-4 py-2 rounded-md border text-sm md:text-base
+              ${selectedTopic === 'all' 
+                ? 'bg-foreground text-background border-foreground' 
+                : 'bg-background text-foreground border-foreground hover:bg-secondary'
+              }
+            `}
+          >
+            All Topics ({allCards.length})
+          </button>
+          {availableTopics.map((topic) => {
+            const topicCount = allCards.filter(card => card.topic === topic).length;
+            return (
+              <button
+                key={topic}
+                onClick={() => handleTopicChange(topic)}
+                className={`
+                  px-4 py-2 rounded-md border text-sm md:text-base
+                  ${selectedTopic === topic 
+                    ? 'bg-foreground text-background border-foreground' 
+                    : 'bg-background text-foreground border-foreground hover:bg-secondary'
+                  }
+                `}
+              >
+                {topic} ({topicCount})
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <Separator className="bg-foreground mb-6" />
+
       {/* Progress indicator */}
       <div className="flex justify-between items-center mb-4">
         <div className="text-sm md:text-base text-muted-foreground">
           Progress: {progress}/{total} cards viewed
+          {selectedTopic !== 'all' && (
+            <span className="block text-xs">Topic: {selectedTopic}</span>
+          )}
         </div>
         <div className="flex gap-2">
           <button 
@@ -125,7 +198,7 @@ export const FlashcardNavigator: React.FC<FlashcardNavigatorProps> = ({ flashcar
             hover:underline hover:cursor-pointer
             disabled:opacity-50 disabled:cursor-not-allowed
           "
-          disabled={allCards.length <= 1}
+          disabled={filteredCards.length <= 1}
         >
           Next Card →
         </button>
