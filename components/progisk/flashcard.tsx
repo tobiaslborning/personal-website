@@ -30,7 +30,7 @@ export const Flashcard: React.FC<FlashcardProps> = ({ topic, title, question, an
       {/* Card */}
       <div 
         onClick={handleFlip}
-        className="relative w-full min-h-[75vh] cursor-pointer group"
+        className="relative w-full min-h-[65vh] md:min-h-[75vh] cursor-pointer group"
       >
         <div className={`
           absolute inset-0 w-full h-full transition-transform duration-500 transform-style-preserve-3d
