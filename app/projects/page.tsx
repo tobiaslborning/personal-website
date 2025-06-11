@@ -81,7 +81,14 @@ const projects = [
         technologies: [
             skillsMap.java,
         ]
-    }
+    },
+    {
+        name: "Flashcards for TDT4237 - Software Securtity and Data Privacy",
+        description: "This was vibe coded in a hurry, so its more of a resource for those that want to practise :)",
+        link: "/progsik",
+        link_text: "Link to flashcards",
+        technologies: []
+    },
 ]
 
 export default async function Page() {
