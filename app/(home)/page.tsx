@@ -14,7 +14,7 @@ export default async function Page() {
           <span className="hover:italic">{"Tobias"}</span>
         </div>
         <div className="text-2xl md:text-3xl xl:text-5xl font-regular">
-          <p>{"CS Student & Software Developer"}</p> 
+          <p>{"CS Student & AI/ML Engineer"}</p> 
           {/* <p>{"I write code, take photos and build things."}</p> */}
         </div>
       </div>

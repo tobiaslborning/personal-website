@@ -5,6 +5,7 @@ import {
     FaJava,
     FaGithub,
     FaGitlab,
+    FaAws,
 } from "react-icons/fa6";
 import { 
     SiTypescript, 
@@ -29,9 +30,13 @@ import {
     SiPostman,
     SiShadcnui,
     SiJavascript,
+    SiFlask,
+    SiMlflow,
+    SiPydantic
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import { BiSolidPiano } from "react-icons/bi";
+import { TbBinaryTreeFilled } from "react-icons/tb";
 
 export const programming_languages = [
    {
@@ -77,6 +82,11 @@ export const web_dev = [
        description: "Modern, high-performance Python web framework for building APIs with automatic interactive documentation. Features type hints, async support, and excellent developer experience for rapid API development.",
        icon: SiFastapi
    },
+    {
+        name: "Flask",
+        description: "Lightweight and flexible Python web framework emphasizing simplicity and minimalism. Provides core functionality with extensive extension options, making it ideal for small to medium-sized applications, APIs, and microservices.",
+        icon: SiFlask
+    },
    {
        name: "Django",
        description: "High-level Python web framework that follows the model-view-template pattern. Includes built-in admin interface, ORM, authentication, and security features for rapid web application development.",
@@ -110,64 +120,89 @@ export const web_dev = [
 ];
 
 export const ai_ml = [
-   {
-       name: "PyTorch",
-       description: "Dynamic deep learning framework with intuitive Python interface and eager execution. Provides flexible neural network building, automatic differentiation, and excellent support for research and production deployment.",
-       icon: SiPytorch
-   },
-   {
-       name: "TensorFlow",
-       description: "Comprehensive machine learning platform for building and deploying ML models at scale. Features high-level APIs, distributed training capabilities, and deployment options across mobile, web, and edge devices.",
-       icon: SiTensorflow
-   },
-   {
-       name: "scikit-learn",
-       description: "User-friendly machine learning library built on NumPy and SciPy. Provides efficient implementations of classification, regression, clustering, and dimensionality reduction algorithms with consistent APIs.",
-       icon: SiScikitlearn
-   },
-   {
-       name: "LangChain",
-       description: "Framework for developing applications powered by large language models. Simplifies LLM integration, provides prompt management, memory systems, and tools for building complex AI-powered applications.",
-       icon: SiLangchain
-   }
+    {
+        name: "PyTorch",
+        description: "Open-source machine learning framework developed by Facebook's AI Research lab. Provides dynamic computational graphs, extensive library support, and seamless integration with Python for deep learning research and production.",
+        icon: SiPytorch
+    },
+    {
+        name: "LangChain",
+        description: "Framework for developing applications powered by language models. Enables building context-aware, reasoning applications with LLMs through chains, agents, and memory components.",
+        icon: SiLangchain
+    },
+    {
+        name: "MLflow",
+        description: "Open-source platform for managing the complete machine learning lifecycle. Provides experiment tracking, model versioning, deployment, and collaborative tools for ML teams.",
+        icon: SiMlflow
+    },
+    {
+        name: "TensorFlow",
+        description: "End-to-end open-source machine learning platform developed by Google. Offers comprehensive ecosystem for building and deploying ML models at scale with strong production support.",
+        icon: SiTensorflow
+    },
+    {
+        name: "Scikit-learn",
+        description: "Simple and efficient machine learning library for Python. Provides tools for data mining, analysis, and classical machine learning algorithms with consistent API design.",
+        icon: SiScikitlearn
+    },
+    {
+        name: "Pydantic",
+        description: "Data validation library using Python type hints. Provides runtime type checking, JSON schema generation, and serialization for building robust APIs and data processing pipelines.",
+        icon: SiPydantic
+    },
+    {
+        name: "XGBoost",
+        description: "Optimized gradient boosting framework designed for speed and performance. Widely used for structured/tabular data in machine learning competitions and production environments with excellent accuracy and efficiency.",
+        icon: TbBinaryTreeFilled
+    },
 ];
 
 export const dev_tools = [
-   {
-       name: "Docker",
-       description: "Containerization platform that packages applications with their dependencies into portable containers. Ensures consistent environments across development, testing, and production while simplifying deployment and scaling.",
-       icon: FaDocker
-   },
-   {
-       name: "Azure",
-       description: "Microsoft's comprehensive cloud computing platform offering IaaS, PaaS, and SaaS solutions. Provides virtual machines, databases, AI services, and DevOps tools for scalable application development and deployment.",
-       icon: VscAzure
-   },
-   {
-       name: "Git",
-       description: "Distributed version control system for tracking code changes and collaboration. Features branching, merging, and distributed workflows that enable multiple developers to work efficiently on shared codebases.",
-       icon: FaGitAlt
-   },
-   {
-       name: "GitHub",
-       description: "Web-based Git repository hosting service with collaboration features, issue tracking, and CI/CD workflows. Provides code review tools, project management, and integration with development tools and services.",
-       icon: FaGithub
-   },
-   {
-       name: "GitLab",
-       description: "Complete DevOps platform combining Git repository management with CI/CD pipelines, issue tracking, and deployment tools. Offers both cloud-hosted and self-managed solutions for end-to-end development workflows.",
-       icon: FaGitlab
-   },
-   {
-       name: "Maven",
-       description: "Build automation and dependency management tool for Java projects. Provides standardized project structure, lifecycle management, and plugin ecosystem for compiling, testing, and packaging applications.",
-       icon: SiApachemaven
-   },
-   {
-       name: "Postman",
-       description: "API development and testing platform that simplifies building, testing, and documenting REST APIs. Provides intuitive interface for sending HTTP requests, organizing collections, and collaborating on API development.",
-       icon: SiPostman
-   },
+    {
+        name: "Docker",
+        description: "Containerization platform that packages applications with their dependencies into portable containers. Ensures consistent environments across development, testing, and production while simplifying deployment and scaling.",
+        icon: FaDocker
+    },
+    {
+        name: "Azure",
+        description: "Microsoft's comprehensive cloud computing platform offering IaaS, PaaS, and SaaS solutions. Provides virtual machines, databases, AI services, and DevOps tools for scalable application development and deployment.",
+        icon: VscAzure
+    },
+    {
+        name: "AWS",
+        description: "Amazon's comprehensive cloud platform offering compute power, storage, databases, and over 200 services. Provides scalable infrastructure, managed services, and extensive tooling for building and deploying applications globally.",
+        icon: FaAws,
+    },
+    {
+        name: "Git",
+        description: "Distributed version control system for tracking code changes and collaboration. Features branching, merging, and distributed workflows that enable multiple developers to work efficiently on shared codebases.",
+        icon: FaGitAlt
+    },
+    {
+        name: "GitHub",
+        description: "Web-based Git repository hosting service with collaboration features, issue tracking, and CI/CD workflows. Provides code review tools, project management, and integration with development tools and services.",
+        icon: FaGithub
+    },
+    {
+    name: "GitHub Actions",
+    description: "CI/CD platform integrated with GitHub repositories for automated testing, building, and deployment workflows. Provides event-driven execution, extensive marketplace actions, and seamless integration with GitHub's ecosystem.",
+    icon: FaGithub
+    },
+    {
+        name: "GitLab",
+        description: "Complete DevOps platform combining Git repository management with CI/CD pipelines, issue tracking, and deployment tools. Offers both cloud-hosted and self-managed solutions for end-to-end development workflows.",
+        icon: FaGitlab
+    },
+    {
+        name: "Maven",
+        description: "Build automation and dependency management tool for Java projects. Provides standardized project structure, lifecycle management, and plugin ecosystem for compiling, testing, and packaging applications.",
+        icon: SiApachemaven
+    },
+    {
+        name: "Postman",
+        description: "API development and testing platform that simplifies building, testing, and documenting REST APIs. Provides intuitive interface for sending HTTP requests, organizing collections, and collaborating on API development.",
+        icon: SiPostman
+    },
 ];
 
 export const creative_tools = [
@@ -204,33 +239,40 @@ export const skillsMap = {
   typescript: programming_languages[0],
   python: programming_languages[1], 
   java: programming_languages[2],
+  javascript: programming_languages[3],
   
   // Web Dev
   nextjs: web_dev[0],
   react: web_dev[1],
   tailwindcss: web_dev[2],
   fastapi: web_dev[3],
-  django: web_dev[4],
-  springboot: web_dev[5],
-  postgresql: web_dev[6],
-  firebase: web_dev[7],
-  sqlite: web_dev[8],
-  shadcn: web_dev[9],
+  flask: web_dev[4],
+  django: web_dev[5],
+  springboot: web_dev[6],
+  postgresql: web_dev[7],
+  firebase: web_dev[8],
+  sqlite: web_dev[9],
+  shadcn: web_dev[10],
   
   // AI/ML
   pytorch: ai_ml[0],
-  tensorflow: ai_ml[1],
-  scikitlearn: ai_ml[2],
-  langchain: ai_ml[3],
+  langchain: ai_ml[1],
+  mlflow: ai_ml[2],
+  tensorflow: ai_ml[3],
+  scikitlearn: ai_ml[4],
+  pydantic: ai_ml[5],
+  xgboost: ai_ml[6],
   
   // Dev Tools
   docker: dev_tools[0],
   azure: dev_tools[1],
-  git: dev_tools[2],
-  github: dev_tools[3],
-  gitlab: dev_tools[4],
-  maven: dev_tools[5],
-  postman: dev_tools[6],
+  aws: dev_tools[2],
+  git: dev_tools[3],
+  github: dev_tools[4],
+  githubactions: dev_tools[5],
+  gitlab: dev_tools[6],
+  maven: dev_tools[7],
+  postman: dev_tools[8],
   
   // Creative Tools
   figma: creative_tools[0],

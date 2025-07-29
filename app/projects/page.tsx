@@ -7,6 +7,23 @@ import { FaLink } from "react-icons/fa6";
 
 const projects = [
     {
+        name: "Content Approval System",
+        description: "Built a comprehensive AI system for Spleis (Sparebank 1's crowdfunding platform) to automatically flag harmful fundraising campaigns, as well as auto-approving legitimate projects. The system combines XGBoost classification, computer vision models (MTCNN for face detection, SigLIP for age classification), and a mixture-of-experts approach using multiple LLMs to evaluate campaigns against platform guidelines and rules. Reduced manual review workload from 60% to 10% of valid campaigns while implementing robust child protection measures through contextual image analysis. We used MLflow and Github Actions to automate and track XGBoost training, such that the best performing model will allways be used in production. The project is from my internship at Bekk.",
+        link: "https://www.bekk.no/fag/artikkel/erfaringsbrev-fra-sommerstudentene-hos-spleis-100126", // Replace with actual link
+        link_text: "Read blog-post (its norwegian)",
+        technologies: [
+            skillsMap.python,
+            skillsMap.pytorch,
+            skillsMap.xgboost,
+            skillsMap.langchain,
+            skillsMap.aws,
+            skillsMap.docker,
+            skillsMap.pydantic,
+            skillsMap.mlflow,
+            skillsMap.githubactions
+        ]
+    },
+    {
         name: "MuZero-knockoff",
         description: "Made a Python implementation of Google DeepMind's MuZero algorithm using PyTorch, featuring model-based reinforcement learning for arcade-style games. The system combines Monte Carlo Tree Search (u-MCTS) with three interconnected neural networks (representation, dynamics, and prediction) to learn optimal game strategies without prior knowledge of game rules.",
         link: "https://youtu.be/51_9J9dxlZM",
@@ -31,7 +48,7 @@ const projects = [
     },
     {
         name: "Snapper Strategist AI",
-        description: "Built a large-scale application from scratch as part of a small two-person dev team, collaborating closely with two product owners on the biggest project I've worked on to date. The experience taught me a lot about handling complex system integrations, making architectural decisions on the fly, and adapting to changing requirements throughout development. This project gave me invaluable hands-on experience with enterprise-level development, working in a small team environment, and building systems that actually need to scale and perform in the real world. Im not able to disclose too much information about the project. ",
+        description: "Built a generative AI application from scratch using Next.js in a two-person team, focusing on creating intuitive user experiences around AI-generated content. Integrated LangChain for LLM orchestration and prompt engineering, learning how to design responsive UI components and manage complex state for AI interactions. Gained experience with Next.js fundamentals, server-side rendering, and API route handling while implementing real-time AI features. Deployed the application using Docker containers on Azure, learning cloud infrastructure and containerization best practices. The project taught me full-stack development patterns, from crafting smooth user interfaces to handling asynchronous AI operations and managing cloud deployments. Due to confidentiality agreements, I can't share specific details, but this project significantly expanded my skills in modern React development, AI integration, and cloud deployment.",
         link: undefined,
         link_text: "Link to site",
         technologies: [
@@ -44,7 +61,8 @@ const projects = [
             skillsMap.langchain,
             skillsMap.azure,
             skillsMap.docker,
-            skillsMap.shadcn
+            skillsMap.shadcn,
+            skillsMap.pydantic
         ]
     },
     {

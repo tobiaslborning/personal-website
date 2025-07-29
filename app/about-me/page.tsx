@@ -20,7 +20,7 @@ export default async function Page() {
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p><span className="font-normal">{"2022 -> 2027 : "}</span> {"M.Sc Computer Science @ NTNU"}</p>
               <p><span className="font-normal">{"2024 : "}</span> {" Summer intern @ Snapper NET Solutions"}</p>
-              <p><span className="font-normal">{"2024 -> now : "}</span> {" Part time software developer @ Snapper NET Solutions"}</p>
+              <p><span className="font-normal">{"2024 -> 2025 : "}</span> {" Part time software developer @ Snapper NET Solutions"}</p>
               <p><span className="font-normal">{"2025 : "}</span> {" Summer intern @ Bekk - Data & Analytics"}</p>
             </div>
           </div>
