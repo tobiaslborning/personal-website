@@ -1,9 +1,81 @@
-"use server"
+"use client"
 import { BackBar } from "@/components/common/back-bar";
 import { BackgroundGradientHome } from "@/components/home/background-gradient-home";
 import { Separator } from "@/components/ui/separator";
+import { TimelineCard } from "@/components/about-me/timeline-card";
+import { skillsMap } from "@/lib/data/skills";
 
-export default async function Page() {
+const timelinedata = [
+    {
+      title: "M.Sc Computer Science",
+      place: "NTNU",
+      link: "https://www.ntnu.edu/studies/mtdt",
+      description: "M.Sc program covering programming fundamentals, algorithms, and operating system architecture, with specialization in artificial intelligence and machine learning. Coursework spans diverse AI topics from computer vision and natural language processing to reinforcement learning, with hands-on projects ranging from low-level system programming to advanced neural network implementations like my MuZero project.",
+      period: "2022-2027",
+      skills: [
+        skillsMap.python,
+        skillsMap.pytorch,
+        skillsMap.java,
+        skillsMap.maven,
+        skillsMap.springboot,
+        skillsMap.scikitlearn,
+        skillsMap.tensorflow,
+        skillsMap.xgboost,
+        skillsMap.django,
+        skillsMap.git,
+      ]
+    },
+    {
+      title: "Data & Analysis Intern",
+      place: "Bekk",
+      link: "https://www.bekk.no",
+      description: "Built an AI content moderation system for Spleis, Sparebank 1’s crowdfunding platform using ensemble ML methods (XGBoost, computer vision models, LLMs). Reduced manual review workloadfrom 60% to 10%, and implemented automated training & trakcing of modles using MLflow.",
+      period: "2025",
+      skills: [
+        skillsMap.python,
+        skillsMap.xgboost,
+        skillsMap.langchain,
+        skillsMap.aws,
+        skillsMap.docker,
+        skillsMap.pydantic,
+        skillsMap.mlflow,
+        skillsMap.githubactions
+      ]
+    },
+    {
+      title: "Software Developer",
+      place: "Snapper NET Solutions",
+      link: "https://www.snapper.no",
+      description: "Developed an AI-powered competence strategy builder using Next.js, FastAPI, and LangChain, learning iterative development, stakeholder communication, and AI product design. Gained experience with full-stack development patterns, from crafting user interfaces to handling asynchronous operations and cloud deployment with Docker on Azure",
+      period: "2024-2025",
+      skills: [
+          skillsMap.nextjs,
+          skillsMap.typescript,
+          skillsMap.tailwindcss,
+          skillsMap.python,
+          skillsMap.fastapi,
+          skillsMap.postgresql,
+          skillsMap.langchain,
+          skillsMap.azure,
+          skillsMap.docker,
+          skillsMap.shadcn,
+          skillsMap.pydantic
+      ]
+    },
+    {
+      title: "Teaching Assistant",
+      place: "NTNU",
+      link: "https://www.ntnu.no/studier/studieplan#programmeCode=MTDT&year=2022",
+      description: "Helped other students with both Python (TDT4109) and Java (TDT4100)",
+      period: "2023-2024",
+      skills: [
+          skillsMap.python,
+          skillsMap.java
+      ]
+    }
+]
+
+export default function Page() {
   return (
     <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8">
       <div>
@@ -15,13 +87,16 @@ export default async function Page() {
       <div className="flex justify-between flex-col lg:flex-row">
         <div className="flex flex-col gap-4 lg:gap-8 lg:max-w-1/2 mb-16">
           {/* WORK */}
-          <div className="flex w-full flex-col pr-8">
+          <div className="flex w-full flex-col">
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Work & Education</h2>
-            <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
-              <p><span className="font-normal">{"2022 -> 2027 : "}</span> {"M.Sc Computer Science @ NTNU"}</p>
-              <p><span className="font-normal">{"2024 : "}</span> {" Summer intern @ Snapper NET Solutions"}</p>
-              <p><span className="font-normal">{"2024 -> 2025 : "}</span> {" Part time software developer @ Snapper NET Solutions"}</p>
-              <p><span className="font-normal">{"2025 : "}</span> {" Summer intern @ Bekk - Data & Analytics"}</p>
+            <div className="mt-4 mr-2 flex flex-col gap-4 font-light text-sm md:text-lg xl:text-xl">
+              {timelinedata.map((card, idx) => {
+                return <div key={idx}>
+                  <TimelineCard 
+                    data={card}
+                  />
+                </div>
+              })}
             </div>
           </div>
           <Separator className="bg-foreground"/>

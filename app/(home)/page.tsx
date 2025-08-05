@@ -30,12 +30,11 @@ export default async function Page() {
           <a className="hover:underline" href="https://www.linkedin.com/in/tobias-borning">LinkedIn</a>
         </div>
       </div>
-      <div>
-      </div>
+      <Separator className="bg-foreground"/>
     </div>
     <div className="animate-fade-in-5s block">
       <BackgroundGradientHome 
-        containerClassName="w-full overflow-hidden"
+        containerClassName="w-full overflow-hidden rounded-4xl"
         firstColor="primary"
         secondColor="primary"
         thirdColor="primary" //181, 240, 177 darkmode

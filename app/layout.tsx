@@ -41,7 +41,7 @@ const fontPair = localFont({
 
 export const metadata: Metadata = {
   title: "Tobias Borning",
-  description: "Portfoli page of Tobias Borning, CS student @ NTNU",
+  description: "Portfolio page of Tobias Borning, CS student @ NTNU",
   icons: {
     icon: [
       { url: '/icon-16x16.png', sizes: '16x16', type: 'image/png' },

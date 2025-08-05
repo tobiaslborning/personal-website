@@ -32,7 +32,8 @@ import {
     SiJavascript,
     SiFlask,
     SiMlflow,
-    SiPydantic
+    SiPydantic,
+    SiPandas
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import { BiSolidPiano } from "react-icons/bi";
@@ -122,7 +123,7 @@ export const web_dev = [
 export const ai_ml = [
     {
         name: "PyTorch",
-        description: "Open-source machine learning framework developed by Facebook's AI Research lab. Provides dynamic computational graphs, extensive library support, and seamless integration with Python for deep learning research and production.",
+        description: "Open-source machine learning framework developed by Meta's AI Research lab. Provides dynamic computational graphs, extensive library support, and seamless integration with Python for deep learning research and production.",
         icon: SiPytorch
     },
     {
@@ -155,6 +156,11 @@ export const ai_ml = [
         description: "Optimized gradient boosting framework designed for speed and performance. Widely used for structured/tabular data in machine learning competitions and production environments with excellent accuracy and efficiency.",
         icon: TbBinaryTreeFilled
     },
+    {
+        name: "Pandas",
+        description: "Powerful Python data analysis and manipulation library. Provides flexible data structures like DataFrames for efficient data cleaning, transformation, and analysis, especially for tabular and time series data.",
+        icon: SiPandas
+    }
 ];
 
 export const dev_tools = [
@@ -262,7 +268,8 @@ export const skillsMap = {
   scikitlearn: ai_ml[4],
   pydantic: ai_ml[5],
   xgboost: ai_ml[6],
-  
+  pandas: ai_ml[7],
+
   // Dev Tools
   docker: dev_tools[0],
   azure: dev_tools[1],
