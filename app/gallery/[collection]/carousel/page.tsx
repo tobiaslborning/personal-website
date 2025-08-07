@@ -1,4 +1,5 @@
 import { BackBar } from "@/components/common/back-bar"
+import { CollectionHeader } from "@/components/gallery/collection-header"
 import { ImageCarousel } from "@/components/gallery/image-carousel"
 import { CollectionInfo, getCollectionInfo, getImagesFromFolder } from "@/lib/actions/image_collections"
 import { shuffleInPlace } from "@/lib/utils"
@@ -25,10 +26,12 @@ export default async function Post({ params } : PageProps ) {
     }
 
     return <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8">
-      <div>
-        <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{fetched_collection.title}</h1>
-      </div>
-      <BackBar href={`/gallery/${collection}`}/>
+      <CollectionHeader
+        topSep={false}
+        bottomSep={true}
+        collectiontTitle={"Image Gallery / " + fetched_collection.title}
+        backLink={`/gallery/${collection}`}
+      />
       <ImageCarousel collection_name={collection} images={images}/>
       <div className="mb-10">
         <p className="text-lg md:text-xl xl:text-2xl font-light">{"© 2025 Tobias Borning. All photographs are protected by copyright."}</p>

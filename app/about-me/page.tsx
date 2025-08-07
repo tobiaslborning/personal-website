@@ -1,9 +1,10 @@
 "use client"
 import { BackBar } from "@/components/common/back-bar";
-import { BackgroundGradientHome } from "@/components/home/background-gradient-home";
 import { Separator } from "@/components/ui/separator";
 import { TimelineCard } from "@/components/about-me/timeline-card";
 import { skillsMap } from "@/lib/data/skills";
+import { PageHeader } from "@/components/common/page-header";
+import { motion } from "framer-motion";
 
 const timelinedata = [
     {
@@ -77,31 +78,60 @@ const timelinedata = [
 
 export default function Page() {
   return (
-    <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8">
-      <div>
+    <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8 mb-16">
+      <PageHeader
+        topSep={false} bottomSep={true} selected="about-me"
+      />
+      {/* <div>
           <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{"Hi, I'm still Tobias"}</h1>
           <h2 className="text-2xl md:text-3xl xl:text-5xl font-regular">{"Here is a litte bit about me"}</h2> 
-      </div>
-      <BackBar />
-      {/* Content */}
-      <div className="flex justify-between flex-col lg:flex-row">
-        <div className="flex flex-col gap-4 lg:gap-8 lg:max-w-1/2 mb-16">
+      </div> */}
+      {/* Content */} 
+      <motion.div 
+        className="flex"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+      >
+      
+      <div className="md:w-2/3 flex flex-col gap-4 lg:gap-8">
           {/* WORK */}
-          <div className="flex w-full flex-col">
+          <motion.div 
+            className="flex flex-col"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          >
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Work & Education</h2>
             <div className="mt-4 mr-2 flex flex-col gap-4 font-light text-sm md:text-lg xl:text-xl">
               {timelinedata.map((card, idx) => {
-                return <div key={idx}>
+                return <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 + (idx * 0.1) }}
+                >
                   <TimelineCard 
                     data={card}
                   />
-                </div>
+                </motion.div>
               })}
             </div>
-          </div>
-          <Separator className="bg-foreground"/>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.7 }}
+          >
+            <Separator className="bg-foreground"/>
+          </motion.div>
           {/* Abakus */}
-          <div className="flex w-full flex-col pr-8">
+          <motion.div 
+            className="flex flex-col pr-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
+          >
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Abakus</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
@@ -110,10 +140,21 @@ export default function Page() {
                 Leading the committee taught me a lot about coordinating teams and creating engaging experiences for fellow students, while also being part of a larger organization that connects students with industry and each other.
               </p>
             </div>
-          </div>
-          <Separator className="bg-foreground"/>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.9 }}
+          >
+            <Separator className="bg-foreground"/>
+          </motion.div>
           {/* Creative stuff */}
-          <div className="flex w-full flex-col pr-8">
+          <motion.div 
+            className="flex flex-col pr-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
+          >
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Creative stuff</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
@@ -122,10 +163,21 @@ export default function Page() {
                 I like how these areas overlap and connect with each other. There's something satisfying about figuring out a new tool or discovering a workflow that just clicks. I tend to dive pretty deep into whatever I'm working on.
               </p>
             </div>
-          </div>
-          <Separator className="bg-foreground"/>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 1.1 }}
+          >
+            <Separator className="bg-foreground"/>
+          </motion.div>
           {/* Away from work */}
-          <div className="flex w-full flex-col pr-8">
+          <motion.div 
+            className="flex flex-col pr-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
+          >
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Away from work</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
@@ -133,10 +185,21 @@ export default function Page() {
               I actually spent two years skiing before starting university, and the mountains are still my favorite place to spend free time.
               </p>
             </div>
-          </div>
-          <Separator className="bg-foreground"/>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 1.3 }}
+          >
+            <Separator className="bg-foreground"/>
+          </motion.div>
           {/* Contact */}
-          <div className="flex w-full flex-col pr-8">
+          <motion.div 
+            className="flex flex-col pr-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 1.4 }}
+          >
             <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Contact</h2>
             <div className="mt-2 font-light text-sm md:text-lg xl:text-xl">
               <p>
@@ -144,18 +207,16 @@ export default function Page() {
               or a message on <a className="font-semibold italic" href="https://www.linkedin.com/in/tobias-borning">LinkedIn.</a>
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
-        <BackgroundGradientHome 
-          containerClassName="hidden lg:block overflow-hidden max-w-1/2 sticky -translate-y-8 rounded-b-full bg-background animate-fade-in-5s"
-          firstColor="primary"
-          secondColor="primary"
-          thirdColor="primary" //181, 240, 177 darkmode
-          pointerColor="primary"
-          interactive={false}
-          size="80%"
-        />
-      </div>
+          <motion.div 
+            className="hidden md:flex rounded-full w-1/3 sticky top-8 bg-primary"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
+          >
+          </motion.div> 
+        </motion.div>   
     </main>
   )
 }

@@ -1,9 +1,11 @@
+"use client"
 import { BackBar } from "@/components/common/back-bar";
-import { BackgroundGradientHome } from "@/components/home/background-gradient-home";
+import { PageHeader } from "@/components/common/page-header";
 import { SkillBadge } from "@/components/skills/skill-badge";
 import { Separator } from "@/components/ui/separator";
 import { skillsMap } from "@/lib/data/skills";
 import { FaLink } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 const projects = [
     {
@@ -109,52 +111,78 @@ const projects = [
     },
 ]
 
-export default async function Page() {
+export default function Page() {
 
     return (
-        <main className="flex flex-col gap-4 lg:gap-8  mt-8 mx-4 lg:mx-8 mb-16">
-        <div>
-            <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{"Projects"}</h1>
-        </div>
-        <BackBar />
-        <div className="flex justify-between flex-col lg:flex-row">
-            <div className="flex flex-col gap-4 lg:gap-8 w-full lg:w-2/3 2xl:w-1/2">
-            {
-            projects.map((project, index) => {
-            return (
-                <div key={index} className="flex flex-col gap-4">
-                    <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">{project.name}</h2>
-                    <p className="text-sm md:text-lg xl:text-xl font-light">{project.description}</p>
-                    {project.link && <a className="w-fit flex hover:underline text-sm md:text-lg xl:text-xl font-regular italic" href={project.link}>
-                            {project.link_text}
-                            <FaLink className="md:mt-1 ml-1 size-4 md:size-6"/>
-                        </a>}
-                    <div className="flex flex-row gap-2 flex-wrap">
-                        {project.technologies.map((skill, index) => {
-                            return <SkillBadge
-                            key={index}
-                            name={skill.name}
-                            description={skill.description}
-                            icon={skill.icon}
-                            />
-                        })}
-                    </div>
-                    <Separator className="bg-foreground mt-4"/>
-                </div>
-            )
-            })
-            }
-            </div>
-            <BackgroundGradientHome 
-                containerClassName="hidden lg:block overflow-hidden max-w-1/3 2xl:max-w-1/2 sticky rounded-b-full -translate-y-8 animate-fade-in-5s"
-                firstColor="primary"
-                secondColor="primary"
-                thirdColor="primary" //181, 240, 177 darkmode
-                pointerColor="primary"
-                interactive={false}
-                size="80%"
+        <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8 mb-16">
+            <PageHeader
+                topSep={false}
+                bottomSep={true}
+                selected="projects"
             />
-        </div>
+            
+            {/* Content */} 
+            <motion.div 
+                className="flex"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            >
+            
+            <div className="md:w-2/3 flex flex-col gap-4 lg:gap-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="flex flex-col gap-4 lg:gap-8 mr-2"
+                >
+                    {
+                    projects.map((project, index) => {
+                    return (
+                        <motion.div 
+                            key={index} 
+                            className="flex flex-col gap-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 + (index * 0.1) }}
+                        >
+                            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">{project.name}</h2>
+                            <p className="text-sm md:text-lg xl:text-xl font-light">{project.description}</p>
+                            {project.link && <a className="w-fit flex hover:underline text-sm md:text-lg xl:text-xl font-regular italic" href={project.link}>
+                                    {project.link_text}
+                                    <FaLink className="md:mt-1 ml-1 size-4 md:size-6"/>
+                                </a>}
+                            <div className="flex flex-row gap-2 flex-wrap">
+                                {project.technologies.map((skill, index) => {
+                                    return <SkillBadge
+                                    key={index}
+                                    name={skill.name}
+                                    description={skill.description}
+                                    icon={skill.icon}
+                                    />
+                                })}
+                            </div>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3, delay: 0.4 + (index * 0.1) }}
+                            >
+                                <Separator className="bg-foreground mt-4"/>
+                            </motion.div>
+                        </motion.div>
+                    )
+                    })
+                    }
+                </motion.div>
+            </div>
+                <motion.div 
+                    className="hidden md:flex rounded-full w-1/3 sticky top-8 bg-primary"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
+                >
+                </motion.div> 
+            </motion.div>   
         </main>
     )
 

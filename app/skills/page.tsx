@@ -1,86 +1,138 @@
-"use server"
+"use client"
 import { BackBar } from "@/components/common/back-bar";
+import { PageHeader } from "@/components/common/page-header";
 import { SkillBadge } from "@/components/skills/skill-badge";
 import { Separator } from "@/components/ui/separator";
 import { programming_languages, web_dev, ai_ml, dev_tools, creative_tools } from "@/lib/data/skills";
+import { motion } from "framer-motion";
 
-export default async function Page() {
-
+export default function Page() {
 
     return (
         <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8 mb-16">
-        <div>
-            <div className="text-3xl md:text-5xl xl:text-7xl font-semibold">
-            <span>{"Skills"}</span>
-            </div>
-            <div className="text-xl md:text-2xl xl:text-4xl  font-regular">
-            </div>
-        </div>
-        <BackBar />
+        <PageHeader
+            topSep={false}
+            bottomSep={true}
+            selected="skills"
+        />
         {/* PROGRAMMING LANGUAGES */}
-        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Programming Languages</h2>
-        <div className="flex flex-row gap-2 flex-wrap">
-        {programming_languages.map((skill, index) => {
-            return <SkillBadge
-            key={index}
-            name={skill.name}
-            description={skill.description}
-            icon={skill.icon}
-            />
-        })}
-        </div>
-        <Separator className="bg-foreground"/>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+        >
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Programming Languages</h2>
+            <div className="flex flex-row gap-2 flex-wrap mt-4">
+            {programming_languages.map((skill, index) => {
+                return <SkillBadge
+                key={index}
+                name={skill.name}
+                description={skill.description}
+                icon={skill.icon}
+                />
+            })}
+            </div>
+        </motion.div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+        >
+            <Separator className="bg-foreground"/>
+        </motion.div>
         {/* AI & ML */}
-        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">AI & ML</h2>
-        <div className="flex flex-row gap-2 flex-wrap">
-        {ai_ml.map((skill, index) => {
-            return <SkillBadge
-            key={index}
-            name={skill.name}
-            description={skill.description}
-            icon={skill.icon}
-            />
-        })}
-        </div>
-        <Separator className="bg-foreground"/>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+        >
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">AI & ML</h2>
+            <div className="flex flex-row gap-2 flex-wrap mt-4">
+            {ai_ml.map((skill, index) => {
+                return <SkillBadge
+                key={index}
+                name={skill.name}
+                description={skill.description}
+                icon={skill.icon}
+                />
+            })}
+            </div>
+        </motion.div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.4 }}
+        >
+            <Separator className="bg-foreground"/>
+        </motion.div>
         {/* Web dev */}
-        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Web development</h2>
-        <div className="flex flex-row gap-2 flex-wrap">
-        {web_dev.map((skill, index) => {
-            return <SkillBadge
-            key={index}
-            name={skill.name}
-            description={skill.description}
-            icon={skill.icon}
-            />
-        })}
-        </div>
-        <Separator className="bg-foreground"/>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+        >
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Web development</h2>
+            <div className="flex flex-row gap-2 flex-wrap mt-4">
+            {web_dev.map((skill, index) => {
+                return <SkillBadge
+                key={index}
+                name={skill.name}
+                description={skill.description}
+                icon={skill.icon}
+                />
+            })}
+            </div>
+        </motion.div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.6 }}
+        >
+            <Separator className="bg-foreground"/>
+        </motion.div>
         {/* Dev tools */}
-        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Dev tools</h2>
-        <div className="flex flex-row gap-2 flex-wrap">
-        {dev_tools.map((skill, index) => {
-            return <SkillBadge
-            key={index}
-            name={skill.name}
-            description={skill.description}
-            icon={skill.icon}
-            />
-        })}
-        </div>
-        <Separator className="bg-foreground"/>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+        >
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Dev tools</h2>
+            <div className="flex flex-row gap-2 flex-wrap mt-4">
+            {dev_tools.map((skill, index) => {
+                return <SkillBadge
+                key={index}
+                name={skill.name}
+                description={skill.description}
+                icon={skill.icon}
+                />
+            })}
+            </div>
+        </motion.div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.8 }}
+        >
+            <Separator className="bg-foreground"/>
+        </motion.div>
         {/* Creative Tools */}
-        <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Creative tools</h2>
-        <div className="flex flex-row gap-2 flex-wrap">
-        {creative_tools.map((skill, index) => {
-            return <SkillBadge
-            key={index}
-            name={skill.name}
-            description={skill.description}
-            icon={skill.icon}
-            />
-        })}
-        </div>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+        >
+            <h2 className="text-2xl md:text-3xl xl:text-5xl font-medium">Creative tools</h2>
+            <div className="flex flex-row gap-2 flex-wrap mt-4">
+            {creative_tools.map((skill, index) => {
+                return <SkillBadge
+                key={index}
+                name={skill.name}
+                description={skill.description}
+                icon={skill.icon}
+                />
+            })}
+            </div>
+        </motion.div>
         </main>
     )
 }
