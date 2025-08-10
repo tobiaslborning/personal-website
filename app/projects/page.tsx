@@ -1,11 +1,12 @@
 "use client"
-import { BackBar } from "@/components/common/back-bar";
-import { PageHeader } from "@/components/common/page-header";
 import { SkillBadge } from "@/components/skills/skill-badge";
 import { Separator } from "@/components/ui/separator";
 import { skillsMap } from "@/lib/data/skills";
 import { FaLink } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { NavBarHeader } from "@/components/common/nav-bar-header";
+import { PageContent } from "@/components/common/page-content";
 
 const projects = [
     {
@@ -112,23 +113,18 @@ const projects = [
 ]
 
 export default function Page() {
-
+    const [morphing, setMorphing] = useState<boolean>(false)
+    
     return (
-        <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8 mb-16">
-            <PageHeader
-                topSep={false}
-                bottomSep={true}
+        <main className="flex flex-col mx-4 md:mx-8 mb-16"> 
+            <NavBarHeader
                 selected="projects"
+                setMorphing={setMorphing}
             />
-            
-            {/* Content */} 
-            <motion.div 
-                className="flex"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            <PageContent
+                morphing={morphing}
+                flexDirection="row"
             >
-            
             <div className="md:w-2/3 flex flex-col gap-4 lg:gap-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -182,7 +178,7 @@ export default function Page() {
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
                 >
                 </motion.div> 
-            </motion.div>   
+            </PageContent>   
         </main>
     )
 

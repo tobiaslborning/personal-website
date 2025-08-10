@@ -1,10 +1,12 @@
 "use client"
-import { BackBar } from "@/components/common/back-bar";
+
 import { Separator } from "@/components/ui/separator";
 import { TimelineCard } from "@/components/about-me/timeline-card";
 import { skillsMap } from "@/lib/data/skills";
-import { PageHeader } from "@/components/common/page-header";
 import { motion } from "framer-motion";
+import { NavBarHeader } from "@/components/common/nav-bar-header";
+import { PageContent } from "@/components/common/page-content";
+import { useState } from "react";
 
 const timelinedata = [
     {
@@ -77,23 +79,18 @@ const timelinedata = [
 ]
 
 export default function Page() {
+  const [morphing, setMorphing] = useState<boolean>(false)
+
   return (
-    <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8 mb-16">
-      <PageHeader
-        topSep={false} bottomSep={true} selected="about-me"
+    <main className="flex flex-col mx-4 md:mx-8 mb-16">
+      <NavBarHeader
+        selected="about-me"
+        setMorphing={setMorphing}
       />
-      {/* <div>
-          <h1 className="text-3xl md:text-5xl xl:text-7xl font-semibold">{"Hi, I'm still Tobias"}</h1>
-          <h2 className="text-2xl md:text-3xl xl:text-5xl font-regular">{"Here is a litte bit about me"}</h2> 
-      </div> */}
-      {/* Content */} 
-      <motion.div 
-        className="flex"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-      >
-      
+      <PageContent
+        morphing={morphing}
+        flexDirection="row"
+      > 
       <div className="md:w-2/3 flex flex-col gap-4 lg:gap-8">
           {/* WORK */}
           <motion.div 
@@ -210,13 +207,13 @@ export default function Page() {
           </motion.div>
         </div>
           <motion.div 
-            className="hidden md:flex rounded-full w-1/3 sticky top-8 bg-primary"
+            className="hidden md:flex rounded-full w-1/3 sticky bg-primary"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
           >
           </motion.div> 
-        </motion.div>   
+      </PageContent>
     </main>
   )
 }

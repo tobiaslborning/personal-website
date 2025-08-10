@@ -1,4 +1,4 @@
-import { BackBar } from "@/components/common/back-bar"
+
 import { CollectionHeader } from "@/components/gallery/collection-header"
 import { ImageCarousel } from "@/components/gallery/image-carousel"
 import { CollectionInfo, getCollectionInfo, getImagesFromFolder } from "@/lib/actions/image_collections"

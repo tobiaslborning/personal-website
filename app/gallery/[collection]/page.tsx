@@ -1,7 +1,6 @@
-import { BackBar } from "@/components/common/back-bar"
+
 import { CollectionHeader } from "@/components/gallery/collection-header"
 import { ImageGallery } from "@/components/gallery/image-gallery"
-import { Separator } from "@/components/ui/separator"
 import { CollectionInfo, getImagesFromFolder, getCollectionInfo } from "@/lib/actions/image_collections"
 import { shuffleInPlace } from "@/lib/utils"
 

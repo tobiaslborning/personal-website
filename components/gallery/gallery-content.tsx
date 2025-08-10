@@ -30,7 +30,7 @@ export function GalleryContent({ collections }: GalleryContentProps) {
           {collections.map((collection, index) => {
             return (
               <motion.div 
-                className="flex flex-col gap-4" 
+                className="flex flex-col w-full gap-4" 
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

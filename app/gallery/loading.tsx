@@ -1,17 +1,13 @@
 "use client"
 
-import { PageHeader } from "@/components/common/page-header";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Separator } from "@/components/ui/separator";
+import { NavBarHeader } from "@/components/common/nav-bar-header"
 
 export default function Loading() {
   
   return (
     <main className="flex flex-col gap-4 lg:gap-8 mt-8 mx-4 lg:mx-8 mb-16">
-      <PageHeader
-        topSep={false}
-        bottomSep={true}
-        selected="gallery"
+      <NavBarHeader
+          selected="gallery"
       />
       
       <div className="flex flex-col gap-4 lg:gap-8">

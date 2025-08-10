@@ -14,17 +14,17 @@ export const CollectionHeader: React.FC<CollectionHeaderProps> = ({ topSep, bott
             {topSep ? <Separator className="bg-foreground"/> : <div></div>}
             {/* Static page header layout */}
             <div className="flex flex-col md:flex-row gap-2 justify-between text-xl xl:text-2xl font-regular">
-                <div className="flex flex-col md:flex-row gap-2 justify-between w-full">
+                <div className="flex flex-row gap-2 justify-between w-full">
                     <a 
-                        className="hover:underline w-1/3 cursor-pointer" 
+                        className="hover:underline md:w-1/3 cursor-pointer" 
                         href={backLink}
                     >
                         {"< Back"}
                     </a>
-                    <p className="w-1/3 text-right pr-4">
+                    <p className="md:w-1/3 text-right pr-4 italic">
                         {collectiontTitle}
                     </p>
-                    <div className="flex w-1/3 justify-end">
+                    <div className="hidden md:flex w-1/3 justify-end">
                         <a className="hover:underline" href="https://www.github.com/tobiaslborning">
                             {"Github "}
                         </a>
