@@ -4,7 +4,8 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "collections/**"
     ],
     "frameworksBackend": {
       "region": "europe-west1"

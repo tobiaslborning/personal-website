@@ -14,7 +14,7 @@ interface PageProps {
 export default async function Post({ params } : PageProps ) {
     const { collection } = await params
     const fetched_collection : CollectionInfo | undefined = await getCollectionInfo(`collections/${collection}`) 
-    const images : ImageFetchData[] = await getImagesFromFolder(`collections/${collection}/preview`) 
+    const images : ImageFetchData[] = await getImagesFromFolder(`collections/${collection}/high-res`) 
     shuffleInPlace(images)
 
     if (!fetched_collection) {
@@ -32,7 +32,7 @@ export default async function Post({ params } : PageProps ) {
         collectiontTitle={"Image Gallery / " + fetched_collection.title}
         backLink={`/gallery/${collection}`}
       />
-      <ImageCarousel collection_name={collection} images={images}/>
+      <ImageCarousel images={images}/>
       <div className="mb-10">
         <p className="text-lg md:text-xl xl:text-2xl font-light">{"© 2025 Tobias Borning. All photographs are protected by copyright."}</p>
         <p className="text-md md:text-lg xl:text-xl font-light">{"Interested in using any of these photos? Contact me at tobias.borning@gmail.com"}</p>

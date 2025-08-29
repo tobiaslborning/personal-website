@@ -1,51 +1,47 @@
 import Image from 'next/image';
-import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
-import { DialogTitle } from '@radix-ui/react-dialog';
+import { Dialog, DialogTrigger } from '../ui/dialog';
 import { HighResImageDialogContent } from './highres-image-dialog-content';
 import { getIndexOfLowest } from '@/lib/utils';
+import { AnimatedImage } from './animated-image';
 
 interface ImageGalleryProps {
-  images: ImageFetchData[];
-  collection_name : string,
+  columns : ImageFetchData[][];
+  collection_name : string;
   className?: string;
   imageClassName?: string;
 }
 
 export const ImageGallery: React.FC<ImageGalleryProps> = ({ 
-  images,
+  columns,
   collection_name 
 }) => {
-  // Distribute images into 3 columns
-  const columns = [[], [], []] as typeof images[];
-  const columnHeights = [0,0,0]
-
-  images.forEach((img) => {
-    const index = getIndexOfLowest(columnHeights)
-    columns[index].push(img);
-    columnHeights[index] += img.height ?? 1500 // 1500 is an estimated average 
-  });
-
 
   return (
     <div className="flex gap-2 mt-6 mb-16">
       {columns.map((columnImages, columnIndex) => (
         <div key={columnIndex} className="flex flex-col gap-1 flex-1">
           {columnImages.map((img, imageIndex) => {
-            const image = <Image
-            src={img.src}
-            alt={img.alt}
-            width={img.width ?? 1000}
-            height={img.height ?? 0}
-            unoptimized
-            className='rounded-sm hover:border-primary border-background border-2'
-            />
+            let width = img.width ?? 1000
+            let height = img.height ?? 0
+          
+            const image = (
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={width}
+                height={height}
+                placeholder='empty'
+                loading='lazy'
+                unoptimized={false}
+              />
+            )
             return (
               <Dialog key={imageIndex}>
                 <DialogTrigger className='hover:cursor-pointer'>
                   {image}
                 </DialogTrigger>
                 <HighResImageDialogContent
-                  filename={img.name.replace(" Large.jpeg",".jpg")}
+                  filename={img.name.replace("-preview.webp",".webp")}
                   collection_name={collection_name}
                 />
               </Dialog>

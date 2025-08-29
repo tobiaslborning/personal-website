@@ -14,9 +14,6 @@ export async function HighResImageDialogContent({filename, collection_name } : H
     const aspectRatio = image.width && image.height ? image.width / image.height : 1;
     const isLandscape = aspectRatio > 1;
 
-    // Generate a simple blur placeholder
-    const blurDataURL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Rev//2Q==";
-
     return (
         <DialogContent className={`
             ${isLandscape 
@@ -34,7 +31,16 @@ export async function HighResImageDialogContent({filename, collection_name } : H
                     <p>F{image.fstop} : {image.exposureTime}</p>
                 </div>
             </DialogTitle>
-            <div className='flex-1 flex items-center justify-center overflow-hidden rounded-sm'>
+            <div className='flex-1 flex items-center justify-center overflow-hidden rounded-sm relative min-h-[400px]'>
+                {/* Loading spinner - centered in the container */}
+                <div className="absolute inset-0 flex items-center justify-center bg-muted/10">
+                    <div className="flex flex-col items-center gap-3">
+                        <div className="w-12 h-12 border-3 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+                        <p className="text-sm text-muted-foreground">Loading image...</p>
+                    </div>
+                </div>
+                
+                {/* Image container */}
                 <div className='relative w-full h-full flex items-center justify-center'>
                     <Image
                         src={image.src}
@@ -42,15 +48,13 @@ export async function HighResImageDialogContent({filename, collection_name } : H
                         width={image.width || 1000}
                         height={image.height || 800}
                         className={`
-                            object-contain w-full h-full
+                            relative z-10 bg-background object-contain w-full h-full
                             ${isLandscape 
                                 ? 'max-h-[80vh]' 
                                 : 'max-h-[85vh] max-w-full'
                             }
                         `}
                         priority
-                        placeholder="blur"
-                        blurDataURL={blurDataURL}
                         sizes="(max-width: 640px) 95vw, (max-width: 768px) 90vw, 1200px"
                     />
                 </div>

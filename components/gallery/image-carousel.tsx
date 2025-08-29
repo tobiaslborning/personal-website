@@ -1,145 +1,77 @@
 "use client"
+import { motion } from 'motion/react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { getHighResImage } from '@/lib/actions/image_collections';
-import { Separator } from '../ui/separator';
+import { useState } from 'react';
 
 interface ImageCarouselProps {
   images: ImageFetchData[];
-  collection_name: string;
-  className?: string;
-  imageClassName?: string;
 }
 
+export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-export const ImageCarousel: React.FC<ImageCarouselProps> = ({ 
-  images,
-  collection_name 
-}) => {
-    const image_filenames = images.map(i => i.name.replace(" Large.jpeg",".jpg"))
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [loadedImages, setLoadedImages] = useState<{ [key: number]: ImageFetchData }>({});
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+  const openFullscreen = (index: number) => {
+    setSelectedImage(index);
+  };
 
-    // Function to load a single image
-    const loadImage = async (index: number) => {
-        if (index < 0 || index >= image_filenames.length) return;
-        if (loadedImages[index]) return; // Check if this specific index is already loaded
+  const closeFullscreen = () => {
+    setSelectedImage(null);
+  };
 
-        try {
-            const filename = image_filenames[index];
-            const image_data = await getHighResImage(`collections/${collection_name}/high-res`, filename);
-            console.log(image_data)
-            // Update state correctly without mutation
-            setLoadedImages(prev => ({
-                ...prev,
-                [index]: image_data
-            }));
-        } catch (error) {
-            console.error(`Failed to load image at index ${index}:`, error);
-        }
-    };
-
-    // Function to load images around current index
-    const loadImagesAroundIndex = async (centerIndex: number) => {
-        setIsLoading(true);
-        
-        // Load current image and 2 ahead
-        const indicesToLoad = [
-            centerIndex,
-            centerIndex + 1,
-            centerIndex + 2
-        ].filter(i => i >= 0 && i < image_filenames.length);
-
-        await Promise.all(indicesToLoad.map(loadImage));
-        setIsLoading(false);
-    };
-
-    // Load initial images on mount
-    useEffect(() => {
-        loadImagesAroundIndex(currentIndex);
-    }, []);
-
-    // Load more images when currentIndex changes
-    useEffect(() => {
-        loadImagesAroundIndex(currentIndex);
-    }, [currentIndex]);
-
-    // Navigation functions
-    const goToNext = () => {
-        if (currentIndex < image_filenames.length - 1) {
-            setCurrentIndex(prev => prev + 1);
-        }
-    };
-
-    const goToPrevious = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(prev => prev - 1);
-        }
-    };
-
-    return (
-        <div className="flex gap-4 flex-col">
-            <div className='flex flex-col gap-2 py-1 sticky top-0 bg-background'>
-                <div className='flex gap-4'>
-                    {/* Previous button */}
-                    <button 
-                        onClick={goToPrevious} 
-                        disabled={currentIndex === 0}
-                        className="
-                            disabled:opacity-50 hover:underline hover:cursor-pointer
-                            text-xl md:text-2xl xl:text-4xl
-                        "
-                    >
-                        {"< Prev"}
-                    </button>
-                    {/* Next button */}
-                    <button 
-                        onClick={goToNext} 
-                        disabled={currentIndex === image_filenames.length - 1}
-                        className="
-                            disabled:opacity-50 hover:underline hover:cursor-pointer 
-                            text-xl md:text-2xl xl:text-4xl
-                        "
-                    >
-                        {"Next >"}
-                    </button>
-                </div>
-            </div>
-            <div className='flex flex-col gap-4 mt-2'>
-                <Separator className='bg-foreground'/>
-                {loadedImages[currentIndex] && (
-                    <div className="flex flex-wrap gap-2 text-xl md:text-2xl xl:text-4xl">
-                    <p>{loadedImages[currentIndex].make  ?? ""} {(loadedImages[currentIndex].model ?? "").replace(loadedImages[currentIndex].make ?? "", "")}</p>
-                    <p>{">"}</p>
-                    <p>{loadedImages[currentIndex].lensMake ?? ""} {(loadedImages[currentIndex].lensModel ?? "").replace(loadedImages[currentIndex].lensMake ?? "", "")}</p>
-                    <p>{">"}</p>
-                    <p>F{loadedImages[currentIndex].fstop} : {loadedImages[currentIndex].exposureTime}</p>
-                </div>)}
-                <Separator className='bg-foreground'/>
-            </div>
-            {/* Current image */}
-            <div className="h-[90vh] w-full"> 
-                {loadedImages[currentIndex] ? (
-                    <Image
-                        src={loadedImages[currentIndex].src}
-                        alt={loadedImages[currentIndex].alt}
-                        width={loadedImages[currentIndex].width || 1000}
-                        height={loadedImages[currentIndex].height || 800}
-                        priority
-                        className="object-contain w-full h-full max-h-[90vh] object-left-top"
-                    />
-                ) : (
-                    <div className="w-full h-[90vh] bg-gray-200 animate-pulse rounded" />
-                )}
-            </div>
-            {/* Loading indicator */}
-            {isLoading && (
-            <div className="absolute top-2 right-2">
-                <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            </div>
-            )}
-            
+  return (
+    <>
+      <div className="flex flex-col gap-4">
+        {/* Images */}
+        <div className="flex gap-4 overflow-x-auto h-[90vh]">
+          {images.map((image, index) => (
+          <motion.div
+              key={index}
+              className="flex-shrink-0 h-full relative group cursor-pointer"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1.5, delay: 0.2, ease: "easeInOut" }}
+              onClick={() => openFullscreen(index)}
+          >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                loading='lazy'
+                className={`object-contain w-auto h-full`}
+              />
+              <div className="absolute top-0 right-0 z-10 flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-background text-lg">
+                <div className='bg-primary px-2 w-fit'>{image.model}</div>
+                <div className='bg-primary px-2 w-fit'>{image.lensModel}</div>
+                <div className='bg-primary px-2 w-fit'>F{image.fstop} : {image.exposureTime}</div>
+              </div>
+            </motion.div>
+          ))}
         </div>
-    );
+      </div>
+
+      {/* Fullscreen overlay */}
+      {selectedImage !== null && (
+        <div 
+          className="fixed inset-0 bg-background z-50 flex items-center justify-center"
+        >
+          <div className="relative w-full mx-4 max-h-[95vh] overflow-scroll">
+            <Image
+              src={images[selectedImage].src}
+              alt={images[selectedImage].alt}
+              width={images[selectedImage].width}
+              height={images[selectedImage].height}
+              className="object-contain w-auto h-auto max-w-full max-h-full"
+            />
+            <button 
+              className="absolute top-4 right-4 text-background hover:text-primary hover:cursor-pointer hover:bg-background bg-primary px-2 rounded-xl text-2xl hover:opacity-70"
+              onClick={closeFullscreen}
+            >
+              <p className='-translate-y-0.5'>x</p>
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
 };

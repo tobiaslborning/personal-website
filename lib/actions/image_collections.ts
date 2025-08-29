@@ -1,29 +1,36 @@
 "use server"
 import fs from 'fs';
 import path from 'path';
-import sharp from 'sharp'
-import exifReader from 'exif-reader';
 
 export interface CollectionInfo {
-  title : string
-  description : string
-  priority : number
-  path? : string
+  title: string
+  description: string
+  priority: number
+  path?: string
+}
+
+
+// Load the manifest file
+function loadManifest() {
+  try {
+    const manifestPath = path.join(process.cwd(), 'public', 'images-manifest.json');
+    const manifestContent = fs.readFileSync(manifestPath, 'utf8');
+    return JSON.parse(manifestContent);
+  } catch (error) {
+    console.error('Error loading manifest:', error);
+    return {};
+  }
 }
 
 export async function getCollectionsInfo(folderPath: string = 'collections'): Promise<CollectionInfo[]> {
   try {
-    const collections : CollectionInfo[] = []
-    const collections_path= path.join(process.cwd(), 'public', folderPath);
-    const all_items = fs.readdirSync(collections_path);
+    const collections: CollectionInfo[] = []
+    const manifest = loadManifest();
     
-    // Filter for directories only
-    const collection_folders = all_items.filter(item => {
-      const itemPath = path.join(collections_path, item);
-      return fs.statSync(itemPath).isDirectory();
-    });
+    // Get collection names from manifest
+    const collectionNames = Object.keys(manifest);
     
-    for(const folderName of collection_folders) {
+    for (const folderName of collectionNames) {
       const info = await getCollectionInfo(`${folderPath}/${folderName}`)
       if (!info) continue
       collections.push({
@@ -37,135 +44,141 @@ export async function getCollectionsInfo(folderPath: string = 'collections'): Pr
     return collections
 
   } catch (error) {
-    console.error('Error reading images directory:', error);
+    console.error('Error reading collections from manifest:', error);
     return [];
   }
 }
 
 export async function getImagesFromFolder(folderPath: string = 'collections'): Promise<ImageFetchData[]> {
   try {
-    const imagesDirectory = path.join(process.cwd(), 'public', folderPath);
-    const filenames = fs.readdirSync(imagesDirectory);
+    const manifest = loadManifest();
     
-    const supportedFormats = /\.(jpg|jpeg|png|gif|svg|webp)$/i;
+    // Parse the folder path to get collection and subfolder
+    const pathParts = folderPath.split('/');
+    let currentLevel = manifest;
     
-    const imagePromises = filenames
-      .filter(name => supportedFormats.test(name))
-      .map(async name => {
-        const imagePath = path.join(imagesDirectory, name);
-        let width, height;
-        
-        try {
-          // Get image dimensions server-side
-          const metadata = await sharp(imagePath).metadata();
-          width = metadata.width;
-          height = metadata.height;
-
-        } catch (error) {
-          console.warn(`Could not get dimensions for ${name}:`, error);
-        }
-
-        
-        return {
-          src: `/${folderPath}/${name}`,
-          alt: name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' '),
-          name: name,
-          width: width,
-          height: height,
-        }
-      });
-
-    return await Promise.all(imagePromises)
+    // Navigate through the manifest structure
+    for (const part of pathParts) {
+      if (part === 'collections') continue; // Skip the root 'collections' part
+      if (currentLevel[part]) {
+        currentLevel = currentLevel[part];
+      } else {
+        console.warn(`Path not found in manifest: ${folderPath}`);
+        return [];
+      }
+    }
+    
+    const images: ImageFetchData[] = [];
+    
+    // Extract images from current level
+    for (const [key, value] of Object.entries(currentLevel)) {
+      // Check if this is an image object (has url property)
+      if (typeof value === 'object' && value !== null && 'url' in value) {
+        const imageData = value as any;
+        images.push({
+          src: imageData.url,
+          alt: imageData.filename?.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ') || key,
+          name: imageData.filename || key,
+          width: imageData.width,
+          height: imageData.height,
+          make: imageData.exif?.make,
+          model: imageData.exif?.model,
+          lensMake: imageData.exif?.lensMake,
+          lensModel: imageData.exif?.lensModel,
+          fstop: imageData.exif?.fstop,
+          exposureTime: imageData.exif?.exposureTime
+        });
+      }
+    }
+    
+    return images;
   } catch (error) {
-    console.error('Error reading images directory:', error);
+    console.error('Error reading images from manifest:', error);
     return [];
   }
 }
 
 export async function getCollectionInfo(folderPath: string = 'collections'): Promise<CollectionInfo | undefined> {
   try {
-    const infoDirectory = path.join(process.cwd(), 'public', folderPath);
-    const aboutJsonPath = path.join(infoDirectory, 'about.json');
-
-    // Check if about.json exists
-    if (!fs.existsSync(aboutJsonPath)) {
-      console.warn(`about.json not found in ${folderPath}`);
-      return undefined;
+    const manifest = loadManifest();
+    
+    // Parse the folder path to navigate through manifest
+    const pathParts = folderPath.split('/').filter(part => part !== '');
+    let currentLevel = manifest;
+    
+    // Navigate through the manifest structure
+    for (const part of pathParts) {
+      if (part === 'collections') continue; // Skip the root 'collections' part
+      if (currentLevel[part]) {
+        currentLevel = currentLevel[part];
+      } else {
+        console.warn(`Collection not found in manifest: ${folderPath}`);
+        return undefined;
+      }
     }
     
-    // Read and parse the JSON file
-    const jsonContent = fs.readFileSync(aboutJsonPath, 'utf8');
-    const parsedData = JSON.parse(jsonContent);
+    // Look for the _about object
+    if (currentLevel._about) {
+      return currentLevel._about as CollectionInfo;
+    }
     
-    return parsedData as CollectionInfo;
+    console.warn(`about.json data not found in manifest for ${folderPath}`);
+    return undefined;
 
   } catch (error) {
-    console.error('Error reading images directory:', error);
+    console.error('Error reading collection info from manifest:', error);
     return undefined;
   }
 }
 
-// Helper function for exposure time formating
-function formatExposureTime(exposureTime: number | undefined): string | undefined {
-  if (!exposureTime) {
-    return undefined
-  }
-  // Handle edge cases
-  if (exposureTime <= 0) {
-    return undefined;
-  }
-  
-  // For exposures 1 second or longer, show as decimal with 's'
-  if (exposureTime >= 1) {
-    if (exposureTime % 1 === 0) {
-      return `${exposureTime}s`;
-    }
-    return `${exposureTime.toFixed(1)}s`;
-  }
-  
-  // For fractional seconds, convert to 1/x format
-  const denominator = Math.round(1 / exposureTime);
-  return `1/${denominator}`;
-}
-
-export async function getHighResImage(highResPath : string, filename : string) : Promise<ImageFetchData> {
-  const imagePath = path.join(process.cwd(), 'public', highResPath, filename);
-  let width, height, make, model, lensMake, lensModel, fstop, exposureTime
-
+export async function getHighResImage(highResPath: string, filename: string): Promise<ImageFetchData> {
   try {
-    // Get image dimensions server-side
-    const metadata = await sharp(imagePath).metadata();
-    width = metadata.width;
-    height = metadata.height;
-
-    // Add camera information
-    if (metadata.exif){
-      const exifData = exifReader(metadata.exif);
-      make = exifData.Image?.Make,
-      model = exifData.Image?.Model,
-      lensMake = exifData.Photo?.LensMake,
-      lensModel = exifData.Photo?.LensModel,
-      fstop = exifData.Photo?.FNumber,
-      exposureTime = formatExposureTime(exifData.Photo?.ExposureTime)
+    const manifest = loadManifest();
+    
+    // Parse the path to navigate through manifest
+    // highResPath is like "collections/fontainebleu/high-res"
+    const pathParts = highResPath.split('/').filter(part => part !== '');
+    let currentLevel = manifest;
+    
+    // Navigate through the manifest structure
+    for (const part of pathParts) {
+      if (part === 'collections') continue; // Skip the root 'collections' part
+      if (currentLevel[part]) {
+        currentLevel = currentLevel[part];
+      } else {
+        throw new Error(`Path not found in manifest: ${highResPath}`);
+      }
     }
-
-
+    
+    // Find the specific image
+    const imageData = currentLevel[filename];
+    
+    if (!imageData || typeof imageData !== 'object' || !('url' in imageData)) {
+      throw new Error(`Image not found in manifest: ${filename}`);
+    }
+    
+    return {
+      src: imageData.url,
+      alt: filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' '),
+      name: filename,
+      width: imageData.width,
+      height: imageData.height,
+      make: imageData.exif?.make,
+      model: imageData.exif?.model,
+      lensMake: imageData.exif?.lensMake,
+      lensModel: imageData.exif?.lensModel,
+      fstop: imageData.exif?.fstop,
+      exposureTime: imageData.exif?.exposureTime
+    };
+    
   } catch (error) {
-    console.warn(`Could not get dimensions for ${filename}:`, error);
-  }
-  
-  return {
-    src: "/"+highResPath+"/"+filename,
-    alt: filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' '),
-    name: filename,
-    width: width,
-    height: height,
-    make: make,
-    model: model,
-    lensMake: lensMake,
-    lensModel: lensModel,
-    fstop: fstop,
-    exposureTime: exposureTime
-
+    console.error(`Error getting high res image ${filename} from ${highResPath}:`, error);
+    
+    // Fallback to a basic response if manifest lookup fails
+    return {
+      src: `/${highResPath}/${filename}`,
+      alt: filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' '),
+      name: filename,
+    };
   }
 }
